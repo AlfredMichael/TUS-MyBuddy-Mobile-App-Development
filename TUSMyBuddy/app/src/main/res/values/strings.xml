@@ -1,0 +1,53 @@
+<resources>
+    <!--Home-->
+    <string name="app_name">TUS MyBuddy</string>
+    <string name="home_screen_image_content_description">TUS MyBuddy</string>
+    <string name="home_screen_text">My</string>
+    <string name="home_screen_textB">Buddy</string>
+    <string name="home_screen_textMessage">Your Buddies, Your Journey: Building Connections One Buddy At A Time</string>
+    <string name="home_screen_loginButton">Login</string>
+    <string name="home_screen_registerButton">Get Started</string>
+    <!--Home-->
+
+
+
+    <!--Sign In-->
+    <string name="sign_in_screen_text">Sign into your Account</string>
+    <string name="sign_in_screen_signIn_button">Sign In</string>
+    <!--Sign In-->
+
+    <!--Sign Up-->
+    <string name="sign_up_screen_text">Create an Account</string>
+    <string name="sign_up_screen_full_name">Full Name</string>
+
+    <!--Generic-->
+    <string name="sign_up_screen_back_button">Back Icon: Navigate back to home</string>
+    <string name="sign_up_screen_email">Email</string>
+    <string name="sign_up_screen_password">Password</string>
+    <!--Generic-->
+
+    <string name="sign_up_screen_register_button">Register</string>
+
+    <!--Sign Up-->
+
+
+    <!--Profile Screen-->
+    <string name="profile_screen_header_text">Profile</string>
+    <string name="profile_screen_close_icon">Close Profile: Note, A profile is needed for you to use TUS MyBuddy </string>
+
+    <string name ="profile_screen_upload_image">Upload profile picture here</string>
+    <string name ="profile_screen_upload_image_button_text">Upload profile picture here</string>
+
+    <!--Input fields - Username, Bio, Interests, Skills and Hobbies-->
+    <string name ="profile_screen_username_label">Username</string>
+    <string name ="profile_screen_bio_label">Bio</string>
+    <string name ="profile_screen_interests_label">Interests</string>
+    <string name ="profile_screen_skills_label">Skills</string>
+    <string name ="profile_screen_hobbies_label">Hobbies</string>
+
+    <string name ="profile_screen_create_profile_button">Finish</string>
+
+
+
+
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Home-->
+    <dimen name="padding_home_columnA">16dp</dimen>
+    <!--Home-->
+
+    <!--Sign Up-->
+    <dimen name="padding_input_fields_start">17dp</dimen>
+    <dimen name="padding_input_fields_top">25dp</dimen>
+    <dimen name="padding_input_fields_end">17dp</dimen>
+    <dimen name="padding_input_fields_bottom">25dp</dimen>
+
+
+    <!--Button Padding-->
+    <dimen name="padding_sign_up_button_start">39dp</dimen>
+    <dimen name="padding_sign_up_button_end">39dp</dimen>
+    <!--Button Padding-->
+
+
+    <!--Sign Up-->
+
+
+    <!--Profile Screen-->
+    <dimen name="padding_profile_screen_top">30dp</dimen>
+    <dimen name="padding_profile_screen_start">9dp</dimen>
+    <dimen name="padding_profile_screen_end">9dp</dimen>
+
+    <dimen name="padding_profile_screen_row_header_start">9dp</dimen>
+    <dimen name="padding_profile_screen_row_header_end">9dp</dimen>
+
+    <dimen name="profile_screen_profile_picture_size">80dp</dimen>
+
+    <dimen name= "profile_screen_column_card_padding_start">20dp</dimen>
+    <dimen name= "profile_screen_column_card_padding_end">20dp</dimen>
+
+    <dimen name= "profile_screen_card_padding_start">15dp</dimen>
+    <dimen name= "profile_screen_card_padding_end">15dp</dimen>
+    <dimen name= "profile_screen_card_padding_top">25dp</dimen>
+    <dimen name= "profile_screen_card_padding_bottom">30dp</dimen>
+
+    <!--Button Padding Profile-->
+    <dimen name="padding_profile_screen_button_start">55dp</dimen>
+    <dimen name="padding_profile_screen_button_end">55dp</dimen>
+    <dimen name="padding_profile_screen_button_top">30dp</dimen>
+    <!--Profile Screen-->
+
+</resources>
