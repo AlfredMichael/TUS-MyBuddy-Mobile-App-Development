@@ -21,10 +21,15 @@
   - RegistrationViewModel - Logic: checks if the entered email exists in the student data in the Firebase Realtime Database. If the email exists, it registers the user with Firebase     
     Authentication and updates the UsersData in the Firebase Realtime Database with the user's and student's information.
   - Error Handling - If an error occurs during the registration process, it posts the error message to a LiveData called **errorMessage**.
+  - Created a ProfileViewModel that fetches user data from Firebase based on a user ID and exposes it through a LiveData object
+  - Modified the ProfileScreen
+  - Modified the ProfileScreenMainContent
+  - Used coroutines to perform an asynchronous network request in a structured and non-blocking way, and then posted the result to a LiveData to be displayed in the UI.
+  - Completed Part of the profile screen
+  - Validation (Fullname, Password, Email)
 
 
 - WORK IN PROGRESS (:heavy_multiplication_x:)
-  - Validation (Fullname, Password, Email)
   - Allow users to create Profile
   - Login
   - Upload Profile Images
