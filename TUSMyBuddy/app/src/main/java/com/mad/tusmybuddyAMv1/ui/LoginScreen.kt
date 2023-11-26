@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -38,15 +39,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavController){
     Scaffold(
-        topBar = {LoginTopAppBar()}
+        topBar = {LoginTopAppBar(navController)}
 
     ) {paddingValues ->
         Column(modifier = Modifier
@@ -67,14 +70,17 @@ fun LoginScreen(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginTopAppBar(){
+fun LoginTopAppBar(navController: NavController){
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically )
             {
-                Icon(imageVector = Icons.Filled.KeyboardArrowLeft,modifier = Modifier.size(25.dp), contentDescription = stringResource(
-                    R.string.sign_up_screen_back_button)
-                )
+                IconButton(onClick = { navController.popBackStack() }) {
+
+                    Icon(imageVector = Icons.Filled.KeyboardArrowLeft,modifier = Modifier.size(25.dp), contentDescription = stringResource(
+                        R.string.sign_up_screen_back_button)
+                    )
+                }
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
@@ -190,7 +196,8 @@ fun LoginMainContent(){
 @Composable
 fun LoginScreenPreview() {
     TUSMyBuddyTheme {
-        LoginScreen()
+        val navController = rememberNavController()
+        LoginScreen(navController)
     }
 }
 
@@ -198,6 +205,7 @@ fun LoginScreenPreview() {
 @Composable
 fun LoginScreenDarkPreview() {
     TUSMyBuddyTheme(darkTheme = true) {
-        LoginScreen()
+        val navController = rememberNavController()
+        LoginScreen(navController)
     }
 }

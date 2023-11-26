@@ -9,8 +9,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.ui.HomeScreen
+import com.mad.tusmybuddyAMv1.ui.LoginScreen
 import com.mad.tusmybuddyAMv1.ui.ProfileScreen
+import com.mad.tusmybuddyAMv1.ui.RegistrationViewModel
+import com.mad.tusmybuddyAMv1.ui.Screen
 import com.mad.tusmybuddyAMv1.ui.SignUpScreen
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 
@@ -24,13 +31,24 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //HomeScreen()
-                    //SignUpScreen()
-                    ProfileScreen()
+                    NavGraph()
                 }
             }
 
         }
+    }
+}
+
+@Composable
+fun NavGraph(startDestination: String = Screen.Home.route) {
+    val navController = rememberNavController()
+    val viewModel: RegistrationViewModel = viewModel()
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable(Screen.Home.route) { HomeScreen(navController) }
+        composable(Screen.Login.route) { LoginScreen(navController) }
+        composable(Screen.SignUp.route) { SignUpScreen(navController, viewModel) }
+        composable(Screen.Profile.route) { ProfileScreen(navController) }
+
     }
 }
 
@@ -39,5 +57,6 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController)
 }

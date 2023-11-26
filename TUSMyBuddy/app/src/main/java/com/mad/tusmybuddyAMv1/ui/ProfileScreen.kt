@@ -48,18 +48,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 @Composable
-fun ProfileScreen(){
+fun ProfileScreen(navController: NavController){
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())){
         //Header
-        ProfileScreenMainHeader()
+        ProfileScreenMainHeader(navController)
         //End Of Header
 
         //Main Content
@@ -86,7 +88,7 @@ fun ProfileScreen(){
 
 //Header - {Profile, X Icon}
 @Composable
-fun ProfileScreenMainHeader(){
+fun ProfileScreenMainHeader(navController: NavController){
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(
@@ -114,7 +116,7 @@ fun ProfileScreenMainHeader(){
             )
 
             //X icon button
-            IconButton(onClick = { }){
+            IconButton(onClick = {navController.navigate(Screen.Home.route)}){
                 Icon(imageVector = Icons.Filled.Close, contentDescription = stringResource(R.string.profile_screen_close_icon))
             }
 
@@ -339,7 +341,8 @@ fun ProfileScreenButton(){
 @Composable
 fun ProfileScreenPreview() {
     TUSMyBuddyTheme {
-        ProfileScreen()
+        val navController = rememberNavController()
+        ProfileScreen(navController)
     }
 }
 
@@ -347,6 +350,7 @@ fun ProfileScreenPreview() {
 @Composable
 fun ProfileScreenDarkPreview() {
     TUSMyBuddyTheme(darkTheme = true) {
-        ProfileScreen()
+        val navController = rememberNavController()
+        ProfileScreen(navController)
     }
 }

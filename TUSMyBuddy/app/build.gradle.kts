@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -62,6 +63,16 @@ dependencies {
     //Custom Implementations
     //1. Coil dependency: Handle async image loading
     implementation("io.coil-kt:coil-compose:1.4.0")
+    //2. Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    //3. Firebase
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.0")
+    //4. ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0-alpha07")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

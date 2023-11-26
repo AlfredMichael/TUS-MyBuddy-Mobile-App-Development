@@ -28,12 +28,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(navController: NavController){
 Column (modifier = Modifier
     .padding(dimensionResource(R.dimen.padding_home_columnA))
     .fillMaxSize()
@@ -89,7 +91,7 @@ Column (modifier = Modifier
     Column() {
         Column {
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = {navController.navigate(Screen.Login.route)},
                 modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(R.string.home_screen_loginButton),
@@ -104,7 +106,7 @@ Column (modifier = Modifier
         Spacer(modifier = Modifier.height(10.dp))
         Column {
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {navController.navigate(Screen.SignUp.route)},
                 modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(R.string.home_screen_registerButton),
@@ -125,7 +127,8 @@ Column (modifier = Modifier
 @Composable
 fun HomeScreenPreview() {
     TUSMyBuddyTheme {
-        HomeScreen()
+        val navController = rememberNavController()
+        HomeScreen(navController)
     }
 }
 
@@ -134,6 +137,7 @@ fun HomeScreenPreview() {
 @Composable
 fun HomeScreenDarkPreview() {
     TUSMyBuddyTheme(darkTheme = true) {
-        HomeScreen()
+        val navController = rememberNavController()
+        HomeScreen(navController)
     }
 }

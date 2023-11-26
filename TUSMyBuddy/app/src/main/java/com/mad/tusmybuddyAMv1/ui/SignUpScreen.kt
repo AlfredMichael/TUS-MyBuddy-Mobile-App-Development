@@ -14,14 +14,17 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -40,15 +43,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.livedata.observeAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen(navController: NavController, viewModel: RegistrationViewModel = viewModel()){
+    val errorMessage by viewModel.errorMessage.observeAsState()
     Scaffold(
-        topBar = {SignUpTopAppBar()}
+        topBar = {SignUpTopAppBar(navController)}
 
     ) {paddingValues ->
         Column(modifier = Modifier
@@ -56,9 +64,21 @@ fun SignUpScreen(){
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
+                if (errorMessage != null) {
+                    AlertDialog(
+                        onDismissRequest = { viewModel.errorMessage.value = null },
+                        title = { Text("Error") },
+                        text = { Text(text = errorMessage!!) },
+                        confirmButton = {
+                            TextButton(onClick = { viewModel.errorMessage.value = null }) {
+                                Text(text = "OK")
+                            }
+                        }
+                    )
+                }
                 Spacer(modifier = Modifier.height(40.dp))
                 SignUpTopText()
-                SignUpMainContent()
+                SignUpMainContent(viewModel)
 
             }
 
@@ -69,12 +89,18 @@ fun SignUpScreen(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpTopAppBar(){
+fun SignUpTopAppBar(navController: NavController){
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically )
             {
-                Icon(imageVector =Icons.Filled.KeyboardArrowLeft,modifier = Modifier.size(25.dp), contentDescription = stringResource(R.string.sign_up_screen_back_button))
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowLeft,
+                        modifier = Modifier.size(25.dp),
+                        contentDescription = stringResource(R.string.sign_up_screen_back_button)
+                    )
+                }
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
@@ -107,7 +133,7 @@ fun SignUpTopText(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpMainContent(){
+fun SignUpMainContent(viewModel: RegistrationViewModel){
     //Input fields
     var fullname by remember{mutableStateOf("")}
     var email by remember { mutableStateOf("") }
@@ -190,7 +216,7 @@ fun SignUpMainContent(){
             end = dimensionResource(R.dimen.padding_sign_up_button_end)
         )){
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {viewModel.registerUser(email, fullname, password) },
             shape=shapes.medium,
             modifier = Modifier.fillMaxWidth()) {
             Text(
@@ -212,15 +238,20 @@ fun SignUpMainContent(){
 @Composable
 fun SignUpScreenPreview() {
     TUSMyBuddyTheme {
-        SignUpScreen()
+        val navController = rememberNavController()
+        val viewModel = RegistrationViewModel()
+        SignUpScreen(navController,viewModel)
     }
 }
+
 
 
 @Preview
 @Composable
 fun SignUpScreenDarkPreview() {
     TUSMyBuddyTheme(darkTheme = true) {
-        SignUpScreen()
+        val navController = rememberNavController()
+        val viewModel = RegistrationViewModel()
+        SignUpScreen(navController,viewModel)
     }
 }
