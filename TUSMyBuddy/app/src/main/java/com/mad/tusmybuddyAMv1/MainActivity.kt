@@ -47,7 +47,12 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController) }
         composable(Screen.SignUp.route) { SignUpScreen(navController, viewModel) }
-        composable(Screen.Profile.route) { ProfileScreen(navController) }
+        // Accept a user ID as an argument in the Profile screen
+        composable("profile/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            ProfileScreen(navController, userId)
+        }
+
 
     }
 }

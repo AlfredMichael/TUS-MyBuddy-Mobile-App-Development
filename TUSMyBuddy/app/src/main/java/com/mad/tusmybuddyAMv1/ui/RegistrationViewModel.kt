@@ -16,6 +16,9 @@ class RegistrationViewModel: ViewModel() {
     // LiveData to hold the error message
     val errorMessage = MutableLiveData<String>()
 
+    //LiveData to hold the user's id
+    val userId = MutableLiveData<String>()
+
     fun registerUser(email: String, fullName: String, password: String) {
         // Query the student data in Firebase Realtime Database
         val studentDataRef = database.getReference("StudentData")
@@ -30,6 +33,7 @@ class RegistrationViewModel: ViewModel() {
                         createUser(email, fullName, password, studentRecord)
                     } else {
                         // Handle the case where studentRecord is null
+                        errorMessage.postValue("Could not fetch your student data, please try again later!")
                     }
                 } else {
                     // The email does not exist in the student data, handle this case
@@ -46,6 +50,11 @@ class RegistrationViewModel: ViewModel() {
 
     //Create User
     private fun createUser(email: String, fullName: String, password: String, studentRecord: Student) {
+        // Check if the name, fullname or email field is empty
+        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            errorMessage.postValue("Name, email or password cannot be empty")
+            return
+        }
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -55,12 +64,15 @@ class RegistrationViewModel: ViewModel() {
                     val currentUser = auth.currentUser
                     if (currentUser != null) {
                         usersDataRef.child(currentUser.uid).setValue(userRecord)
+                        // Post the user ID to a LiveData
+                        userId.postValue(currentUser.uid)
                     } else {
                         // Handle the case where currentUser is null
+                        errorMessage.postValue("An error has occurred, Please Try again later")
                     }
 
                     // Get the user ID
-                    val userId = auth.currentUser?.uid
+                    //val userId = auth.currentUser?.uid
                 } else {
                     // Handle failure
                     errorMessage.postValue(task.exception?.message)

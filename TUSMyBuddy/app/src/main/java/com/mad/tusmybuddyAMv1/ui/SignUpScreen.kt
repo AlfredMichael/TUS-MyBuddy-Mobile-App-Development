@@ -50,6 +50,7 @@ import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,7 +79,7 @@ fun SignUpScreen(navController: NavController, viewModel: RegistrationViewModel 
                 }
                 Spacer(modifier = Modifier.height(40.dp))
                 SignUpTopText()
-                SignUpMainContent(viewModel)
+                SignUpMainContent(navController,viewModel)
 
             }
 
@@ -133,11 +134,15 @@ fun SignUpTopText(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpMainContent(viewModel: RegistrationViewModel){
+fun SignUpMainContent(navController: NavController, viewModel: RegistrationViewModel){
     //Input fields
     var fullname by remember{mutableStateOf("")}
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    // Observe the userId LiveData
+    val userId = viewModel.userId.observeAsState()
+
     Column(modifier = Modifier
         .padding(
             start= dimensionResource(R.dimen.padding_input_fields_start),
@@ -216,7 +221,14 @@ fun SignUpMainContent(viewModel: RegistrationViewModel){
             end = dimensionResource(R.dimen.padding_sign_up_button_end)
         )){
         Button(
-            onClick = {viewModel.registerUser(email, fullname, password) },
+            onClick = {
+                            viewModel.registerUser(email.lowercase(Locale.getDefault()), fullname, password)
+
+                            // Navigate to the Profile screen if the userId is not null
+                            if (userId.value != null) {
+                                navController.navigate("profile/${userId.value}")
+                            }
+                      },
             shape=shapes.medium,
             modifier = Modifier.fillMaxWidth()) {
             Text(

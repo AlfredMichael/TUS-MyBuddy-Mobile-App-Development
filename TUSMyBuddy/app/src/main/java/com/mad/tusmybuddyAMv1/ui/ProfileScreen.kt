@@ -32,7 +32,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
@@ -56,7 +59,13 @@ import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 @Composable
-fun ProfileScreen(navController: NavController){
+fun ProfileScreen(navController: NavController, userId: String?){
+    // Get an instance of ProfileViewModel
+    val viewModel: ProfileViewModel = viewModel()
+    // Fetch user data when the ProfileScreen is composed
+    LaunchedEffect(userId) {
+        userId?.let { viewModel.fetchUserData(it) }
+    }
     Column(modifier = Modifier
         .fillMaxSize()
         .verticalScroll(rememberScrollState())){
@@ -70,7 +79,7 @@ fun ProfileScreen(navController: NavController){
             profilePicture = uri
         }
 
-        ProfileScreenMainContent(profilePicture){
+        ProfileScreenMainContent(profilePicture, viewModel){
             launcher.launch("image/*")
         }
         //End of Main Content
@@ -79,6 +88,8 @@ fun ProfileScreen(navController: NavController){
         ProfileScreenButton()
 
         //End Of Button
+        // Test - Display the user ID
+        //Text(text = "User ID: $userId")
 
 
     }
@@ -129,6 +140,7 @@ fun ProfileScreenMainHeader(navController: NavController){
 @Composable
 fun ProfileScreenMainContent(
     profilePicture: Uri? = null,
+    viewModel: ProfileViewModel,
     onImageClick: ()-> Unit
 ){
     var username by remember{mutableStateOf("")}
@@ -136,6 +148,11 @@ fun ProfileScreenMainContent(
     var skills by remember { mutableStateOf("") }
     var hobbies by remember { mutableStateOf("") }
     var interests by remember { mutableStateOf("") }
+
+    // Observe the userData LiveData
+    val userData by viewModel.userData.observeAsState()
+
+
     Column(modifier = Modifier.padding(
         start = dimensionResource(R.dimen.profile_screen_column_card_padding_start),
         end = dimensionResource(R.dimen.profile_screen_column_card_padding_end)
@@ -175,7 +192,7 @@ fun ProfileScreenMainContent(
 
                 //Text - FullName
                 Text(
-                    text = "Alfred Michael",
+                    text = " ${userData?.fullName}",
                     fontFamily = publicSans,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
@@ -183,7 +200,7 @@ fun ProfileScreenMainContent(
 
                 //Text - Course
                 Text(
-                    text = "Internet Systems Development",
+                    text = " ${userData?.course}",
                     fontFamily = publicSans,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
@@ -191,7 +208,7 @@ fun ProfileScreenMainContent(
 
                 //Text - Year
                 Text(
-                    text = "Year 3",
+                    text = "Year ${userData?.year}",
                     fontFamily = publicSans,
                     fontWeight = FontWeight.Normal,
                     fontSize = 16.sp,
@@ -342,7 +359,7 @@ fun ProfileScreenButton(){
 fun ProfileScreenPreview() {
     TUSMyBuddyTheme {
         val navController = rememberNavController()
-        ProfileScreen(navController)
+        ProfileScreen(navController,"dummmmy")
     }
 }
 
@@ -351,6 +368,6 @@ fun ProfileScreenPreview() {
 fun ProfileScreenDarkPreview() {
     TUSMyBuddyTheme(darkTheme = true) {
         val navController = rememberNavController()
-        ProfileScreen(navController)
+        ProfileScreen(navController,"dummmmy")
     }
 }
