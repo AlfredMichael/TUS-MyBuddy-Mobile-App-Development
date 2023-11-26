@@ -33,7 +33,7 @@
   - Allow users to create Profile
   - Login
   - Upload Profile Images
-  - Implementing the skills, hobbies and interests dropdown (:Or letting users enter hobbies, skills and interest as a delimited string)
+  - Implementing the skills, hobbies and interests dropdown (:Or letting users enter hobbies, skills and interests as a delimited string)
 
 ## Week :three:
 - FEATURES THAT HAVE BEEN COMPLETED (:heavy_check_mark:)
