@@ -8,10 +8,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -21,13 +19,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -48,7 +46,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -75,17 +72,25 @@ fun ProfileScreen(navController: NavController, userId: String?){
 
         //Main Content
         var profilePicture by remember { mutableStateOf<Uri?>(null) } // Store the image URI
+        /*val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()){ uri ->
+            profilePicture = uri
+        }*/
+
         val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()){ uri ->
             profilePicture = uri
+            userId?.let {
+                if (uri != null) {
+                    viewModel.uploadImage(it, uri)
+                }
+            }
         }
 
-        ProfileScreenMainContent(profilePicture, viewModel){
+        ProfileScreenMainContent(userId, profilePicture, viewModel){
             launcher.launch("image/*")
         }
         //End of Main Content
 
-        //Button
-        ProfileScreenButton()
+
 
         //End Of Button
         // Test - Display the user ID
@@ -139,6 +144,7 @@ fun ProfileScreenMainHeader(navController: NavController){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreenMainContent(
+    userId: String?,
     profilePicture: Uri? = null,
     viewModel: ProfileViewModel,
     onImageClick: ()-> Unit
@@ -151,6 +157,21 @@ fun ProfileScreenMainContent(
 
     // Observe the userData LiveData
     val userData by viewModel.userData.observeAsState()
+
+    val errorMessage by viewModel.errorMessage.observeAsState()
+
+    if (errorMessage != null) {
+        AlertDialog(
+            onDismissRequest = { viewModel.errorMessage.value = null },
+            title = { Text("Error") },
+            text = { Text(text = errorMessage!!) },
+            confirmButton = {
+                Button(onClick = { viewModel.errorMessage.value = null }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 
 
     Column(modifier = Modifier.padding(
@@ -167,7 +188,8 @@ fun ProfileScreenMainContent(
                     start = dimensionResource(R.dimen.profile_screen_card_padding_start),
                     end = dimensionResource(R.dimen.profile_screen_card_padding_end),
                     top = dimensionResource(R.dimen.profile_screen_card_padding_top),
-                    bottom = dimensionResource(R.dimen.profile_screen_card_padding_bottom)),
+                    bottom = dimensionResource(R.dimen.profile_screen_card_padding_bottom)
+                ),
             horizontalAlignment = Alignment.CenterHorizontally){
                 //Image
                 if(profilePicture != null)
@@ -323,36 +345,34 @@ fun ProfileScreenMainContent(
                     keyboardActions = KeyboardActions.Default,
                 )
 
+                Column(modifier = Modifier.padding(
+                    start = dimensionResource(R.dimen.padding_profile_screen_button_start),
+                    end = dimensionResource(R.dimen.padding_profile_screen_button_end),
+                    top = dimensionResource(R.dimen.padding_profile_screen_button_top)
+
+                )){
+                    //Button
+                    Button(
+                        onClick = { userId?.let {
+                            viewModel.updateUserData(it, username, bio, skills, hobbies, interests)
+                        } },
+                        shape= MaterialTheme.shapes.medium,
+                        modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = stringResource(R.string.profile_screen_create_profile_button),
+                            fontFamily = publicSans,
+                            fontWeight=FontWeight.Normal,
+                            fontSize = 16.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+
             }
         }
     }
 }
 
-//Button
-@Composable
-fun ProfileScreenButton(){
-    Column(modifier = Modifier.padding(
-            start = dimensionResource(R.dimen.padding_profile_screen_button_start),
-            end = dimensionResource(R.dimen.padding_profile_screen_button_end),
-            top = dimensionResource(R.dimen.padding_profile_screen_button_top)
-
-        )){
-        //Button
-        Button(
-            onClick = { /*TODO*/ },
-            shape= MaterialTheme.shapes.medium,
-            modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = stringResource(R.string.profile_screen_create_profile_button),
-                fontFamily = publicSans,
-                fontWeight=FontWeight.Normal,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-
-}
 
 @Preview(showBackground = true)
 @Composable

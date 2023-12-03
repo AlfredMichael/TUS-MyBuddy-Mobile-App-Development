@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.ui.HomeScreen
 import com.mad.tusmybuddyAMv1.ui.LoginScreen
+import com.mad.tusmybuddyAMv1.ui.LoginViewModel
 import com.mad.tusmybuddyAMv1.ui.ProfileScreen
 import com.mad.tusmybuddyAMv1.ui.RegistrationViewModel
 import com.mad.tusmybuddyAMv1.ui.Screen
@@ -43,9 +44,10 @@ class MainActivity : ComponentActivity() {
 fun NavGraph(startDestination: String = Screen.Home.route) {
     val navController = rememberNavController()
     val viewModel: RegistrationViewModel = viewModel()
+    val viewModelL: LoginViewModel = viewModel()
     NavHost(navController = navController, startDestination = startDestination) {
         composable(Screen.Home.route) { HomeScreen(navController) }
-        composable(Screen.Login.route) { LoginScreen(navController) }
+        composable(Screen.Login.route) { LoginScreen(navController,viewModelL ) }
         composable(Screen.SignUp.route) { SignUpScreen(navController, viewModel) }
         // Accept a user ID as an argument in the Profile screen
         composable("profile/{userId}") { backStackEntry ->

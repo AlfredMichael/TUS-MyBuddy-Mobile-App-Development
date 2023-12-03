@@ -14,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,10 +23,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -39,15 +42,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController){
+fun LoginScreen(navController: NavController, viewModel: LoginViewModel = viewModel()){
+    val errorMessage by viewModel.errorMessage.observeAsState()
     Scaffold(
         topBar = {LoginTopAppBar(navController)}
 
@@ -57,9 +63,21 @@ fun LoginScreen(navController: NavController){
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
+                if (errorMessage != null) {
+                    AlertDialog(
+                        onDismissRequest = { viewModel.errorMessage.value = null },
+                        title = { Text("Error") },
+                        text = { Text(text = errorMessage!!) },
+                        confirmButton = {
+                            TextButton(onClick = { viewModel.errorMessage.value = null }) {
+                                Text(text = "OK")
+                            }
+                        }
+                    )
+                }
                 Spacer(modifier = Modifier.height(50.dp))
                 LoginTopText()
-                LoginMainContent()
+                LoginMainContent(navController,viewModel)
 
             }
 
@@ -113,10 +131,13 @@ fun LoginTopText(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginMainContent(){
+fun LoginMainContent(navController: NavController, viewModel: LoginViewModel){
     //Input fields
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    // Observe the userId LiveData
+    val userId = viewModel.userIdm.observeAsState()
     Column(modifier = Modifier
         .padding(
             start= dimensionResource(R.dimen.padding_input_fields_start),
@@ -175,7 +196,12 @@ fun LoginMainContent(){
             end = dimensionResource(R.dimen.padding_sign_up_button_end)
         )){
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {  viewModel.loginUser(email.lowercase(Locale.getDefault()), password)
+
+                // Navigate to the Profile screen if the userId is not null
+                if (userId.value != null) {
+                    navController.navigate("profile/${userId.value}")
+                } },
             shape= MaterialTheme.shapes.medium,
             modifier = Modifier.fillMaxWidth()) {
             Text(
