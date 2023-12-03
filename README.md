@@ -37,8 +37,14 @@
 
 ## Week :three:
 - FEATURES THAT HAVE BEEN COMPLETED (:heavy_check_mark:)
-  - |
+  - Image Upload to Firebase Storage
+  - Data Update in Firebase Realtime Database
+  - Firebase Authentication Integration
+  - Input Validation and Error Handling
+  - LiveData Usage
+  - Jetpack Compose UI Updates
 
 
 - WORK IN PROGRESS (:heavy_multiplication_x:)
-  - |
+  - Home Screen
+  - Main Functionality
