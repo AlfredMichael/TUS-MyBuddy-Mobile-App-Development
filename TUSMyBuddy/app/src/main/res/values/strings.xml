@@ -49,5 +49,12 @@
 
 
 
+    <!-- Start Screen-->
+    <string name ="email_icon">Email Icon</string>
+    <string name ="user_icon">User Icon</string>
+
+
+
+
 
 </resources>
