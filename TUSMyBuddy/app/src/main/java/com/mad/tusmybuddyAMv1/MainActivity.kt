@@ -20,6 +20,7 @@ import com.mad.tusmybuddyAMv1.ui.ProfileScreen
 import com.mad.tusmybuddyAMv1.ui.RegistrationViewModel
 import com.mad.tusmybuddyAMv1.ui.Screen
 import com.mad.tusmybuddyAMv1.ui.SignUpScreen
+import com.mad.tusmybuddyAMv1.ui.StartScreen
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +33,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavGraph()
+                    //NavGraph()
+                    StartScreen()
                 }
             }
 

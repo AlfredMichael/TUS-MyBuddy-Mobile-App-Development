@@ -63,6 +63,7 @@ dependencies {
     //Custom Implementations
     //1. Coil dependency: Handle async image loading
     implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
     //2. Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
     //3. Firebase
