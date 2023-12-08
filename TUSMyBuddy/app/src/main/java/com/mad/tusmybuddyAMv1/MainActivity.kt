@@ -13,6 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mad.tusmybuddyAMv1.ui.ChatScreen
 import com.mad.tusmybuddyAMv1.ui.HomeScreen
 import com.mad.tusmybuddyAMv1.ui.LoginScreen
 import com.mad.tusmybuddyAMv1.ui.LoginViewModel
@@ -34,7 +35,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //NavGraph()
-                    StartScreen()
+                    //StartScreen()
+                    val navController = rememberNavController()
+                    ChatScreen(navController)
                 }
             }
 

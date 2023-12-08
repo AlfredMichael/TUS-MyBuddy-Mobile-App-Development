@@ -137,7 +137,7 @@ fun LoginMainContent(navController: NavController, viewModel: LoginViewModel){
     var password by remember { mutableStateOf("") }
 
     // Observe the userId LiveData
-    val userId = viewModel.userIdm.observeAsState()
+    val userId = viewModel.userId.observeAsState()
     Column(modifier = Modifier
         .padding(
             start= dimensionResource(R.dimen.padding_input_fields_start),

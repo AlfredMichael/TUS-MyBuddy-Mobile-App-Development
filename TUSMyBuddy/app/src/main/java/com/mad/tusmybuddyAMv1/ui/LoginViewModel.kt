@@ -14,7 +14,7 @@ class LoginViewModel: ViewModel() {
     val errorMessage = MutableLiveData<String>()
 
     //LiveData to hold the user's id
-    val userIdm = MutableLiveData<String?>()
+    val userId = MutableLiveData<String?>()
 
     fun loginUser(email: String, password: String) {
         // Check if the email or password field is empty
@@ -27,10 +27,10 @@ class LoginViewModel: ViewModel() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // User is logged in, now you can get the user ID
-                    val userId = auth.currentUser?.uid
-                    if (userId != null) {
+                    val userIdm = auth.currentUser?.uid
+                    if (userIdm != null) {
                         // Post the user ID to a LiveData
-                        userIdm.postValue(userId)
+                        userId.postValue(userIdm)
                     } else {
                         // Handle the case where userId is null
                         errorMessage.postValue("An error has occurred, Please Try again later")
