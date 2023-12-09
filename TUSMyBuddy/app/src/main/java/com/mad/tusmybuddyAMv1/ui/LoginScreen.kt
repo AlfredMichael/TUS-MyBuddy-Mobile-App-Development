@@ -200,7 +200,7 @@ fun LoginMainContent(navController: NavController, viewModel: LoginViewModel){
 
                 // Navigate to the Profile screen if the userId is not null
                 if (userId.value != null) {
-                    navController.navigate("profile/${userId.value}")
+                    navController.navigate("start/${userId.value}")
                 } },
             shape= MaterialTheme.shapes.medium,
             modifier = Modifier.fillMaxWidth()) {

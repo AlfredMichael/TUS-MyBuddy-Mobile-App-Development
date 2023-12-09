@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -17,21 +16,13 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,10 +31,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,14 +49,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(){
+fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = viewModel(), userId: String?){
+    val buddies = userId?.let { viewModel.fetchBuddies(it).collectAsState(initial = emptyList()) }
     Scaffold(
         topBar = {StartScreenTopAppBar()},
         bottomBar = {BottomNavigationBar()}
@@ -77,10 +69,11 @@ fun StartScreen(){
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
+                buddies?.value?.let { MainScreenMessages(it, userId, navController) }
 
-                MainScreenMessages()
 
             }
+            Text(text = "User ID: $userId")
 
         }
 
@@ -134,156 +127,56 @@ fun StartScreenTopAppBar(){
 }
 
 @Composable
-fun MainScreenMessages(){
-    Card(
+fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navController: NavController){
+    for ((buddyId, buddy) in buddies) {
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-                .clickable(onClick = { }),
-    shape = MaterialTheme.shapes.medium
-    ) {
-        Row(
-            modifier = Modifier.padding(all = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .clickable(onClick = {
+                    if (userId != null) {
+                        navController.navigate("chat/${userId}/$buddyId/${buddy.email}/${buddy.fullName}")
+                    }
+                }),
+            shape = MaterialTheme.shapes.medium
         ) {
+            Row(
+                modifier = Modifier.padding(all = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-            AsyncImage(
-                model = "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FsY1MGkf4SsgNxixt2cqqsChOpCD2?alt=media&token=e51e4f5b-30bb-4e4e-b129-e9478f6696b9",
-                contentDescription = null,
-                modifier = Modifier
-                    .size(53.dp)
-                    .clip(CircleShape)
-                    .clickable(onClick = {})
-            )
+                AsyncImage(
+                    model = buddy.profilePicture,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(53.dp)
+                        .clip(CircleShape)
+                        .clickable(onClick = {}),
+                    contentScale = ContentScale.Crop
+                )
 
-
-            Text(
-                text = "Alfred Michael",
-                fontFamily = publicSans,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                Icons.Default.KeyboardArrowRight,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-
-        }
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-            .clickable(onClick = { }),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Row(
-            modifier = Modifier.padding(all = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            AsyncImage(
-                model = "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FsY1MGkf4SsgNxixt2cqqsChOpCD2?alt=media&token=e51e4f5b-30bb-4e4e-b129-e9478f6696b9",
-                contentDescription = null,
-                modifier = Modifier
-                    .size(53.dp)
-                    .clip(CircleShape)
-                    .clickable(onClick = {})
-            )
+                Spacer(modifier = Modifier.width(5.dp))
 
 
-            Text(
-                text = "Alfred Michael",
-                fontFamily = publicSans,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                Icons.Default.KeyboardArrowRight,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
+                Text(
+                    text = buddy.fullName ?: "",
+                    fontFamily = publicSans,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.weight(1f)
+                )
+                /*Text(
+                    text = "User ID: $buddyId",
+                    fontFamily = publicSans,
+                    fontWeight = FontWeight.Normal
+                )*/
+                Icon(
+                    Icons.Default.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
 
-        }
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-            .clickable(onClick = { }),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Row(
-            modifier = Modifier.padding(all = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            AsyncImage(
-                model = "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FsY1MGkf4SsgNxixt2cqqsChOpCD2?alt=media&token=e51e4f5b-30bb-4e4e-b129-e9478f6696b9",
-                contentDescription = null,
-                modifier = Modifier
-                    .size(53.dp)
-                    .clip(CircleShape)
-                    .clickable(onClick = {})
-            )
-
-
-            Text(
-                text = "Alfred Michael",
-                fontFamily = publicSans,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                Icons.Default.KeyboardArrowRight,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-
-        }
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-            .clickable(onClick = { }),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Row(
-            modifier = Modifier.padding(all = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            AsyncImage(
-                model = "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FsY1MGkf4SsgNxixt2cqqsChOpCD2?alt=media&token=e51e4f5b-30bb-4e4e-b129-e9478f6696b9",
-                contentDescription = null,
-                modifier = Modifier
-                    .size(53.dp)
-                    .clip(CircleShape)
-                    .clickable(onClick = {})
-            )
-
-
-            Text(
-                text = "Alfred Michael",
-                fontFamily = publicSans,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                Icons.Default.KeyboardArrowRight,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-
+            }
         }
     }
 }
@@ -329,9 +222,10 @@ fun BottomNavigationBar() {
 
 @Preview(showBackground = true)
 @Composable
-fun StartScreenPreview() {
+fun StartScreenPreview(viewModel: StartScreenViewModel = viewModel()) {
     TUSMyBuddyTheme {
-        StartScreen()
+        val navController = rememberNavController()
+        StartScreen(navController, viewModel, "dummy")
     }
 }
 
@@ -339,8 +233,9 @@ fun StartScreenPreview() {
 
 @Preview
 @Composable
-fun StartScreenDarkPreview() {
+fun StartScreenDarkPreview(viewModel: StartScreenViewModel = viewModel()) {
     TUSMyBuddyTheme(darkTheme = true) {
-        StartScreen()
+        val navController = rememberNavController()
+        StartScreen(navController,viewModel,"dummy")
     }
 }

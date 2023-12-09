@@ -35,12 +35,13 @@ class ProfileViewModel: ViewModel() {
                     val task = usersDataRef.child(userId).get()
                     Tasks.await(task)
                 }
+                Log.d("ProfileViewModel", "DataSnapshot: $dataSnapshot")
                 val user = dataSnapshot.getValue(User::class.java)
                 _userData.postValue(user)
             } catch (e: Exception) {
                 // Log the exception
                 Log.e("ProfileViewModel", "Failed to fetch user data", e)
-                errorMessage.postValue("Could not user data, please try again later!")
+                errorMessage.postValue("Could not find user data, please try again later!")
             }
         }
     }
@@ -75,6 +76,7 @@ class ProfileViewModel: ViewModel() {
                 "skills" to skills.split(",").map { it.trim() },
                 "hobbies" to hobbies.split(",").map { it.trim() },
                 "interests" to interests.split(",").map { it.trim() },
+                "buddies" to listOf("placeholder"),
                 "buddiesCount" to 0,
                 "reputationPoints" to 0
             )

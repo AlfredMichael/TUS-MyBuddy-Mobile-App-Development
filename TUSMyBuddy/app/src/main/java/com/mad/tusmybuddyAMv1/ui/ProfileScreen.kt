@@ -85,7 +85,7 @@ fun ProfileScreen(navController: NavController, userId: String?){
             }
         }
 
-        ProfileScreenMainContent(userId, profilePicture, viewModel){
+        ProfileScreenMainContent(userId, profilePicture, navController, viewModel){
             launcher.launch("image/*")
         }
         //End of Main Content
@@ -146,6 +146,7 @@ fun ProfileScreenMainHeader(navController: NavController){
 fun ProfileScreenMainContent(
     userId: String?,
     profilePicture: Uri? = null,
+    navController: NavController,
     viewModel: ProfileViewModel,
     onImageClick: ()-> Unit
 ){
@@ -355,6 +356,9 @@ fun ProfileScreenMainContent(
                     Button(
                         onClick = { userId?.let {
                             viewModel.updateUserData(it, username, bio, skills, hobbies, interests)
+
+                            //Navigate to the start screen
+                            navController.navigate("start/${it}")
                         } },
                         shape= MaterialTheme.shapes.medium,
                         modifier = Modifier.fillMaxWidth()) {

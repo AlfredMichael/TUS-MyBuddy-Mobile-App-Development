@@ -141,3 +141,9 @@ fun HomeScreenDarkPreview() {
         HomeScreen(navController)
     }
 }
+
+/*
+& 'C:\Users\Alfredo Michael\AppData\Local\Android\Sdk\platform-tools\adb.exe' kill-server
+& 'C:\Users\Alfredo Michael\AppData\Local\Android\Sdk\platform-tools\adb.exe' start-server
+
+ */

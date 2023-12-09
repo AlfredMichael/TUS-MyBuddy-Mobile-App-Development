@@ -11,8 +11,10 @@ data class User(
     val hobbies: List<String>? = null,
     val skills: List<String>? = null,
     val interests: List<String>? = null,
+    val buddies: List<String>? = null,
     val bio: String? = null,
     val buddiesCount: Int? = null,
-    val profilePicture: Uri? = null,
+    val profilePicture: String? = null,
+    //val profilePicture: Uri? = null,
     val reputationPoints: Int? = null
 )

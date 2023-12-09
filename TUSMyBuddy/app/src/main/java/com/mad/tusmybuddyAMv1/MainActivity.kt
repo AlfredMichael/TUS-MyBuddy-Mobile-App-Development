@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mad.tusmybuddyAMv1.ui.ChatScreen
+import com.mad.tusmybuddyAMv1.ui.ChatViewModel
 import com.mad.tusmybuddyAMv1.ui.HomeScreen
 import com.mad.tusmybuddyAMv1.ui.LoginScreen
 import com.mad.tusmybuddyAMv1.ui.LoginViewModel
@@ -22,6 +23,7 @@ import com.mad.tusmybuddyAMv1.ui.RegistrationViewModel
 import com.mad.tusmybuddyAMv1.ui.Screen
 import com.mad.tusmybuddyAMv1.ui.SignUpScreen
 import com.mad.tusmybuddyAMv1.ui.StartScreen
+import com.mad.tusmybuddyAMv1.ui.StartScreenViewModel
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,10 +36,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //NavGraph()
+                    NavGraph()
                     //StartScreen()
-                    val navController = rememberNavController()
-                    ChatScreen(navController)
+                    //val navController = rememberNavController()
+                    //ChatScreen(navController)
                 }
             }
 
@@ -50,6 +52,8 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
     val navController = rememberNavController()
     val viewModel: RegistrationViewModel = viewModel()
     val viewModelL: LoginViewModel = viewModel()
+    val viewModelLL: StartScreenViewModel = viewModel()
+    val viewModelLLL: ChatViewModel = viewModel()
     NavHost(navController = navController, startDestination = startDestination) {
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController,viewModelL ) }
@@ -59,6 +63,22 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
             val userId = backStackEntry.arguments?.getString("userId")
             ProfileScreen(navController, userId)
         }
+
+        // Accept a user ID as an argument in the Start screen
+        composable("start/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            StartScreen(navController,viewModelLL, userId)
+        }
+
+        //Accept the user id, email and fullName as arguments
+        composable("chat/{userId}/{email}/{buddyId}/{fullName}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            val buddyId = backStackEntry.arguments?.getString("buddyId")
+            val email = backStackEntry.arguments?.getString("email")
+            val fullName = backStackEntry.arguments?.getString("fullName")
+            ChatScreen(navController,viewModelLLL, userId, buddyId, email, fullName)
+        }
+
 
 
     }
