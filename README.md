@@ -55,14 +55,13 @@
   - Chat Menu
   - Block User
   - Execute functions with couroutines
+  - Notifications
+  - Connect with buddies
 
 
 
 - WORK IN PROGRESS (:heavy_multiplication_x:)
-  - Notifications
-  - Connect with buddies
-  - Maps
   - LogOut
   - TUS Theme
   - Call Service
-  - Internet Connection Service
+  - Internet Connection Error Message
