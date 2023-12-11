@@ -48,3 +48,21 @@
 - WORK IN PROGRESS (:heavy_multiplication_x:)
   - Home Screen
   - Main Functionality
+ 
+## Week :four:
+- FEATURES THAT HAVE BEEN COMPLETED (:heavy_check_mark:)
+  - Chat Functionality (Based on buddies)
+  - Chat Menu
+  - Block User
+  - Execute functions with couroutines
+
+
+
+- WORK IN PROGRESS (:heavy_multiplication_x:)
+  - Notifications
+  - Connect with buddies
+  - Maps
+  - LogOut
+  - TUS Theme
+  - Call Service
+  - Internet Connection Service
