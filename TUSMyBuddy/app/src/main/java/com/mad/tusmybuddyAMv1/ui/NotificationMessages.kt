@@ -1,19 +1,22 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
 package com.mad.tusmybuddyAMv1.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
@@ -24,20 +27,21 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -46,21 +50,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
-import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = viewModel(), userId: String?){
-    val buddies = userId?.let { viewModel.fetchBuddies(it).collectAsState(initial = emptyList()) }
+fun NotificationMessages(navController: NavController,viewModel: NotificationViewModel = viewModel(), userId: String?){
+    val messageSenders = userId?.let { viewModel.fetchMessageSenders(it).collectAsState(initial = emptyList()) }
     Scaffold(
-        topBar = {StartScreenTopAppBar()},
-        bottomBar = {BottomNavigationBar(navController, userId)}
+        topBar = {NotificationScreenTopAppBar()},
+        bottomBar = {NotificationBottomNavigationBar(navController, userId)}
 
 
     ){paddingValues ->
@@ -69,8 +74,12 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
-                buddies?.value?.let { MainScreenMessages(it, userId, navController) }
 
+                Spacer(modifier = Modifier.height(10.dp))
+
+                messageSenders?.value?.let { NotificationMainMessages(it,navController,userId)}
+
+                Spacer(modifier = Modifier.height(5.dp))
 
             }
             Text(text = "User ID: $userId")
@@ -80,13 +89,89 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
 
     }
 
+}
+
+@Composable
+fun NotificationMainMessages(messageSenders: List<Pair<String, User>>, navController: NavController, currentUserId: String?){
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = { /*TODO*/ },
+                enabled = false) {
+                Text(text = "Notification Messages",
+                    fontFamily = publicSans)
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Button(onClick = {
+                currentUserId?.let {
+                    //Navigate to the Notifications screen
+                    navController.navigate("buddyrequest/${it}")
+                }
+            }) {
+                Text(text = "Buddy Requests",
+                    fontFamily = publicSans)
+            }
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        for ((userId, user) in messageSenders) {
+            Card(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(start = 9.dp, end = 9.dp, top = 12.dp, bottom = 3.dp)
+                    .clickable(onClick = {
+                        currentUserId?.let {
+                            //Navigate to the Start screen
+                            navController.navigate("start/${it}")
+                        }
+                    }),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Row(
+                    modifier = Modifier.padding(all = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    AsyncImage(
+                        model = user.profilePicture,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(53.dp)
+                            .clip(CircleShape)
+                            .clickable(onClick = {}),
+                        contentScale = ContentScale.Crop
+                    )
+                    Spacer(modifier = Modifier.width(5.dp))
+                    Text(
+                        text = "${user.fullName} sent you a message",
+                        fontFamily = publicSans,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Icon(
+                        Icons.Default.KeyboardArrowRight,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+        //End
+    }
+
 
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreenTopAppBar(){
+fun NotificationScreenTopAppBar(){
     TopAppBar(
         title = {
             Row(
@@ -100,7 +185,7 @@ fun StartScreenTopAppBar(){
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
                         .size(dimensionResource(R.dimen.size_start_screen))
-                        //.clip(CircleShape) - Was going to use this for user profile, but it looks better with tus
+                        //.clip(CircleShape)
                         .aspectRatio(1f)
                 )
             }
@@ -126,69 +211,25 @@ fun StartScreenTopAppBar(){
 
 }
 
-@Composable
-fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navController: NavController){
-    for ((buddyId, buddy) in buddies) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-                .clickable(onClick = {
-                    if (userId != null) {
-                        navController.navigate("chat/${userId}/$buddyId/${buddy.email}/${buddy.fullName}")
-                    }
-                }),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Row(
-                modifier = Modifier.padding(all = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                AsyncImage(
-                    model = buddy.profilePicture,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(53.dp)
-                        .clip(CircleShape)
-                        .clickable(onClick = {}),
-                    contentScale = ContentScale.Crop
-                )
-
-                Spacer(modifier = Modifier.width(5.dp))
 
 
-                Text(
-                    text = buddy.fullName ?: "",
-                    fontFamily = publicSans,
-                    fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.weight(1f)
-                )
-                /*Text(
-                    text = "User ID: $buddyId",
-                    fontFamily = publicSans,
-                    fontWeight = FontWeight.Normal
-                )*/
-                Icon(
-                    Icons.Default.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp)
-                )
 
-            }
-        }
-    }
-}
+
+
 
 @Composable
-fun BottomNavigationBar(navController: NavController, userId: String?) {
+fun NotificationBottomNavigationBar(navController: NavController, userId: String?) {
     BottomAppBar {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = {
+                userId?.let {
+                    //Navigate to the Start screen
+                    navController.navigate("start/${it}")
+                }
+            }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.Home, contentDescription = "Home Icon")
                     Text(text = "Home", fontSize = 12.sp)
@@ -211,12 +252,7 @@ fun BottomNavigationBar(navController: NavController, userId: String?) {
                     Text(text = "Profile", fontSize = 12.sp)
                 }
             }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("notificationmessages/${it}")
-                }
-            }) {
+            IconButton(onClick = { /* do something */ }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
                     Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
                     Text(text = "Notif..", fontSize = 12.sp)
@@ -228,14 +264,12 @@ fun BottomNavigationBar(navController: NavController, userId: String?) {
 }
 
 
-
-
 @Preview(showBackground = true)
 @Composable
-fun StartScreenPreview(viewModel: StartScreenViewModel = viewModel()) {
+fun NotificationScreenPreview(viewModel: NotificationViewModel = viewModel()) {
     TUSMyBuddyTheme {
         val navController = rememberNavController()
-        StartScreen(navController, viewModel, "dummy")
+        NotificationMessages(navController, viewModel, "dummy")
     }
 }
 
@@ -243,9 +277,10 @@ fun StartScreenPreview(viewModel: StartScreenViewModel = viewModel()) {
 
 @Preview
 @Composable
-fun StartScreenDarkPreview(viewModel: StartScreenViewModel = viewModel()) {
+fun NotificationScreenDarkPreview(viewModel: NotificationViewModel = viewModel()) {
     TUSMyBuddyTheme(darkTheme = true) {
         val navController = rememberNavController()
-        StartScreen(navController,viewModel,"dummy")
+        NotificationMessages(navController, viewModel,"dummy")
     }
 }
+

@@ -53,6 +53,15 @@
     <string name ="email_icon">Email Icon</string>
     <string name ="user_icon">User Icon</string>
 
+    <!-- FCM -->
+    <!-- Took the code from this article - https://firebase.blog/posts/2023/08/adding-fcm-to-jetpack-compose-app/-->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="request_notification_permission">Request permission</string>
+    <string name="notification_permission_title">Notification permission</string>
+    <string name="ok">Ok</string>
+    <string name="notification_permission_description">The notification permission is important for this app. Please grant the permission.</string>
+    <string name="notification_permission_settings">The notification permission is important for this app. Please navigate to your device settings and enable notifications for Make it So.</string>
+    <!--FCM End-->
 
 
 

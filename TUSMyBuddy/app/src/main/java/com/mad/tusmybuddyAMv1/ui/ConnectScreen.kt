@@ -1,4 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
 package com.mad.tusmybuddyAMv1.ui
 
 import androidx.compose.foundation.Image
@@ -9,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,10 +20,10 @@ import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,7 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,24 +42,27 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
-import androidx.lifecycle.viewmodel.compose.viewModel
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = viewModel(), userId: String?){
-    val buddies = userId?.let { viewModel.fetchBuddies(it).collectAsState(initial = emptyList()) }
+fun ConnectScreen(navController: NavController,viewModel: ConnectViewModel = viewModel(), userId: String?){
+    val similarUsers = userId?.let { viewModel.fetchSimilarUsers(it).collectAsState(initial = emptyList()) }
+
     Scaffold(
-        topBar = {StartScreenTopAppBar()},
-        bottomBar = {BottomNavigationBar(navController, userId)}
+        topBar = {ConnectScreenTopAppBar()},
+        bottomBar = {ConnectBottomNavigationBar(navController, userId)}
 
 
     ){paddingValues ->
@@ -69,7 +71,7 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
-                buddies?.value?.let { MainScreenMessages(it, userId, navController) }
+                similarUsers?.value?.let { ConnectScreenMain(it, userId, navController, viewModel)}
 
 
             }
@@ -80,13 +82,11 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
 
     }
 
-
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreenTopAppBar(){
+fun ConnectScreenTopAppBar(){
     TopAppBar(
         title = {
             Row(
@@ -100,7 +100,7 @@ fun StartScreenTopAppBar(){
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
                         .size(dimensionResource(R.dimen.size_start_screen))
-                        //.clip(CircleShape) - Was going to use this for user profile, but it looks better with tus
+                        //.clip(CircleShape)
                         .aspectRatio(1f)
                 )
             }
@@ -110,14 +110,14 @@ fun StartScreenTopAppBar(){
                 Icon(
                     imageVector = Icons.Filled.Call,
                     modifier = Modifier.size(25.dp),
-                    contentDescription = "Call Alfred Michael"
+                    contentDescription = stringResource(R.string.email_icon)
                 )
             }
             IconButton(onClick = { }) {
                 Icon(
                     imageVector = Icons.Filled.ExitToApp,
                     modifier = Modifier.size(25.dp),
-                    contentDescription = "Log out"
+                    contentDescription = stringResource(R.string.user_icon)
                 )
             }
         }
@@ -127,79 +127,82 @@ fun StartScreenTopAppBar(){
 }
 
 @Composable
-fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navController: NavController){
-    for ((buddyId, buddy) in buddies) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 5.dp, end = 5.dp, top = 12.dp, bottom = 3.dp)
-                .clickable(onClick = {
-                    if (userId != null) {
-                        navController.navigate("chat/${userId}/$buddyId/${buddy.email}/${buddy.fullName}")
-                    }
-                }),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Row(
-                modifier = Modifier.padding(all = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
+fun ConnectScreenMain(similarUsers: List<Pair<String, User>>, currentUserId: String?, navController: NavController,viewModel: ConnectViewModel = viewModel()){
+    for ((userId, user) in similarUsers) {
+        val isBuddy = currentUserId?.let { viewModel.isBuddy(it, userId).collectAsState(initial = false) }
+        Card(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 9.dp, end = 9.dp, top = 12.dp, bottom = 3.dp),
+            shape = MaterialTheme.shapes.medium) {
+            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 AsyncImage(
-                    model = buddy.profilePicture,
+                    model = user.profilePicture,
                     contentDescription = null,
                     modifier = Modifier
-                        .size(53.dp)
-                        .clip(CircleShape)
-                        .clickable(onClick = {}),
+                        .fillMaxWidth()
+                        .size(165.dp)
+                        .clickable(onClick = {
+                            //Profile Picture
+                        }),
                     contentScale = ContentScale.Crop
                 )
 
-                Spacer(modifier = Modifier.width(5.dp))
-
+                Spacer(modifier = Modifier.height(5.dp))
 
                 Text(
-                    text = buddy.fullName ?: "",
+                    text = user.fullName ?: "",
                     fontFamily = publicSans,
+                    fontSize =20.sp,
                     fontWeight = FontWeight.SemiBold,
-                    modifier = Modifier.weight(1f)
-                )
-                /*Text(
-                    text = "User ID: $buddyId",
-                    fontFamily = publicSans,
-                    fontWeight = FontWeight.Normal
-                )*/
-                Icon(
-                    Icons.Default.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp)
+                    textAlign = TextAlign.Center
                 )
 
+
+                Spacer(modifier = Modifier.height(2.dp))
+
+                Text(
+                    text = user.course ?: "",
+                    fontFamily = publicSans,
+                    fontWeight = FontWeight.Normal,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(7.dp))
+
+                if (isBuddy != null) {
+                    Button(onClick = { viewModel.sendBuddyRequest(currentUserId, userId) },
+                        enabled = !isBuddy.value) {
+                        Text(text = if (isBuddy.value) "Buddy Request Sent" else "Send Buddy Request")
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
+
     }
+
+
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController, userId: String?) {
+fun ConnectBottomNavigationBar(navController: NavController, userId: String?) {
     BottomAppBar {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = {
+                userId?.let {
+                    //Navigate to the Connect screen
+                    navController.navigate("start/${it}")
+                }
+            }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.Home, contentDescription = "Home Icon")
                     Text(text = "Home", fontSize = 12.sp)
                 }
             }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("connect/${it}")
-                }
-            }) {
+            IconButton(onClick = { /* do something */ }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
                     Text(text = "Maps", fontSize = 12.sp)
@@ -227,15 +230,12 @@ fun BottomNavigationBar(navController: NavController, userId: String?) {
 
 }
 
-
-
-
 @Preview(showBackground = true)
 @Composable
-fun StartScreenPreview(viewModel: StartScreenViewModel = viewModel()) {
+fun ConnectScreenPreview(viewModel: ConnectViewModel = viewModel()) {
     TUSMyBuddyTheme {
         val navController = rememberNavController()
-        StartScreen(navController, viewModel, "dummy")
+        ConnectScreen(navController,viewModel, "dummy")
     }
 }
 
@@ -243,9 +243,9 @@ fun StartScreenPreview(viewModel: StartScreenViewModel = viewModel()) {
 
 @Preview
 @Composable
-fun StartScreenDarkPreview(viewModel: StartScreenViewModel = viewModel()) {
+fun ConnectScreenDarkPreview(viewModel: ConnectViewModel = viewModel()) {
     TUSMyBuddyTheme(darkTheme = true) {
         val navController = rememberNavController()
-        StartScreen(navController,viewModel,"dummy")
+        ConnectScreen(navController,viewModel,"dummy")
     }
 }

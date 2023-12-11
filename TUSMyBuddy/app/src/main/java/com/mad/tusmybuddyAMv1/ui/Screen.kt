@@ -8,6 +8,12 @@ sealed class Screen(val route: String){
     object Start: Screen("start")
     object Chat: Screen("chat")
 
+    object Connect: Screen("connect")
+
+    object NotificationMessages: Screen("notificationmessages")
+
+    object BuddyRequest: Screen("buddyrequest")
+
 }
 
 

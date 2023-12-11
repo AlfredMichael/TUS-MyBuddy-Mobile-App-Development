@@ -61,7 +61,8 @@ import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewModel(), userId: String?, email:String?, buddyId: String?, fullName: String?){
-    /*val messages = userId?.let { userId ->
+    /* -- Mistake - do not uncomment, tried using id and emails to retrieve messages
+    val messages = userId?.let { userId ->
         email?.let { email ->
             viewModel.fetchMessages(userId, email).collectAsState(initial = emptyList())
         }
