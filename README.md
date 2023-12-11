@@ -57,11 +57,11 @@
   - Execute functions with couroutines
   - Notifications
   - Connect with buddies
+  - LogOut
+  - Call Service
 
 
 
 - WORK IN PROGRESS (:heavy_multiplication_x:)
-  - LogOut
   - TUS Theme
-  - Call Service
   - Internet Connection Error Message
