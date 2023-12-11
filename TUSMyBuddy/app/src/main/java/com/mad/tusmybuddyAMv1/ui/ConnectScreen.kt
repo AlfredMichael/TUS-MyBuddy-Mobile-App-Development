@@ -1,5 +1,7 @@
 package com.mad.tusmybuddyAMv1.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -38,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,7 +64,7 @@ fun ConnectScreen(navController: NavController,viewModel: ConnectViewModel = vie
     val similarUsers = userId?.let { viewModel.fetchSimilarUsers(it).collectAsState(initial = emptyList()) }
 
     Scaffold(
-        topBar = {ConnectScreenTopAppBar()},
+        topBar = {ConnectScreenTopAppBar(navController, viewModel)},
         bottomBar = {ConnectBottomNavigationBar(navController, userId)}
 
 
@@ -86,7 +89,8 @@ fun ConnectScreen(navController: NavController,viewModel: ConnectViewModel = vie
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConnectScreenTopAppBar(){
+fun ConnectScreenTopAppBar(navController: NavController, viewModel: ConnectViewModel=viewModel()){
+    val context = LocalContext.current
     TopAppBar(
         title = {
             Row(
@@ -106,18 +110,25 @@ fun ConnectScreenTopAppBar(){
             }
         },
         actions = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                val dialIntent = Intent(Intent.ACTION_DIAL)
+                dialIntent.data = Uri.parse("tel:" + "+353874864779")
+                context.startActivity(dialIntent)
+            }) {
                 Icon(
                     imageVector = Icons.Filled.Call,
                     modifier = Modifier.size(25.dp),
-                    contentDescription = stringResource(R.string.email_icon)
+                    contentDescription = "Call Alfred"
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                viewModel.logoutUser()
+                navController.navigate(Screen.Home.route)
+            }) {
                 Icon(
                     imageVector = Icons.Filled.ExitToApp,
                     modifier = Modifier.size(25.dp),
-                    contentDescription = stringResource(R.string.user_icon)
+                    contentDescription = "Log out"
                 )
             }
         }

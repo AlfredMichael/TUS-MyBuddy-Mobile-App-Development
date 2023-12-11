@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Tasks
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProfileViewModel: ViewModel() {
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     private val _userData = MutableLiveData<User?>()
     val userData: LiveData<User?> get() = _userData
 
@@ -83,6 +86,12 @@ class ProfileViewModel: ViewModel() {
             usersDataRef.updateChildren(userData)
 
         }
+
+    }
+
+    fun logoutUser() {
+        // Sign out the user
+        auth.signOut()
 
     }
 

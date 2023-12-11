@@ -3,6 +3,7 @@ package com.mad.tusmybuddyAMv1.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -14,6 +15,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 class NotificationViewModel: ViewModel() {
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     private val _userData = MutableLiveData<User?>()
     val userData: LiveData<User?> get() = _userData
 
@@ -147,6 +150,12 @@ class NotificationViewModel: ViewModel() {
                 // Handle error
             }
         })
+    }
+
+    fun logoutUser() {
+        // Sign out the user
+        auth.signOut()
+
     }
 
 

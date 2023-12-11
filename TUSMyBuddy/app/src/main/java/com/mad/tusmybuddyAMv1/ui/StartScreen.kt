@@ -1,6 +1,8 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 package com.mad.tusmybuddyAMv1.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -54,12 +57,13 @@ import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = viewModel(), userId: String?){
     val buddies = userId?.let { viewModel.fetchBuddies(it).collectAsState(initial = emptyList()) }
     Scaffold(
-        topBar = {StartScreenTopAppBar()},
+        topBar = {StartScreenTopAppBar(viewModel,navController)},
         bottomBar = {BottomNavigationBar(navController, userId)}
 
 
@@ -86,7 +90,8 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreenTopAppBar(){
+fun StartScreenTopAppBar(viewModel: StartScreenViewModel = viewModel(), navController: NavController){
+    val context = LocalContext.current
     TopAppBar(
         title = {
             Row(
@@ -106,14 +111,23 @@ fun StartScreenTopAppBar(){
             }
         },
         actions = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                val dialIntent = Intent(Intent.ACTION_DIAL)
+                dialIntent.data = Uri.parse("tel:" + "+353874864779")
+                context.startActivity(dialIntent)
+            }) {
                 Icon(
                     imageVector = Icons.Filled.Call,
                     modifier = Modifier.size(25.dp),
                     contentDescription = "Call Alfred Michael"
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                viewModel.logoutUser()
+                navController.navigate(Screen.Home.route)
+
+
+            }) {
                 Icon(
                     imageVector = Icons.Filled.ExitToApp,
                     modifier = Modifier.size(25.dp),
