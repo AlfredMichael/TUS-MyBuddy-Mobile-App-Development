@@ -219,7 +219,12 @@ fun ConnectBottomNavigationBar(navController: NavController, userId: String?) {
                     Text(text = "Maps", fontSize = 12.sp)
                 }
             }
-            IconButton(onClick = { /* do something */ }) {
+            IconButton(onClick = {
+                userId?.let {
+                    //Navigate to the user profile screen
+                    navController.navigate("userprofilescreen/${it}")
+                }
+            }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.Person, contentDescription = "User Icon")
                     Text(text = "Profile", fontSize = 12.sp)

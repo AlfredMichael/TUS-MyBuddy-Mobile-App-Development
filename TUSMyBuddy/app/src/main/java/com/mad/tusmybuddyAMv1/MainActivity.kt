@@ -43,6 +43,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
 import com.mad.tusmybuddyAMv1.ui.PermissionDialog
 import com.mad.tusmybuddyAMv1.ui.RationaleDialog
+import com.mad.tusmybuddyAMv1.ui.UserProfileScreen
+import com.mad.tusmybuddyAMv1.ui.UserProfileViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -68,6 +70,7 @@ class MainActivity : ComponentActivity() {
                     NavGraph()
                     //StartScreen()
                     //val navController = rememberNavController()
+                    //UserProfileScreen(navController, "dummy")
                     //ChatScreen(navController)
                     //ConnectScreen(navController, "dummy" )
                 }
@@ -100,6 +103,7 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
     val viewModelLLL: ChatViewModel = viewModel()
     val viewModelRL: ConnectViewModel = viewModel()
     val viewModelRRL: NotificationViewModel = viewModel()
+    val viewModeNL: UserProfileViewModel = viewModel()
     NavHost(navController = navController, startDestination = startDestination) {
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController,viewModelL ) }
@@ -132,6 +136,12 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
         composable("notificationmessages/{userId}") { backStackEntry ->
             val userId = backStackEntry.arguments?.getString("userId")
             NotificationMessages(navController,viewModelRRL,userId)
+        }
+
+        // Accept a user ID as an argument in the User Profile screen
+        composable("userprofilescreen/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            UserProfileScreen(navController,viewModeNL, userId)
         }
 
         //Accept the user id, email and fullName as arguments

@@ -14,6 +14,8 @@ sealed class Screen(val route: String){
 
     object BuddyRequest: Screen("buddyrequest")
 
+    object UserProfileScreen: Screen("userprofilescreen")
+
 }
 
 
