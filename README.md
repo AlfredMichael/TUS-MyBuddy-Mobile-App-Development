@@ -59,9 +59,11 @@
   - Connect with buddies
   - LogOut
   - Call Service
+  - Profile Page
 
 
 
 - WORK IN PROGRESS (:heavy_multiplication_x:)
   - TUS Theme
+  - Other User Profile Page
   - Internet Connection Error Message
