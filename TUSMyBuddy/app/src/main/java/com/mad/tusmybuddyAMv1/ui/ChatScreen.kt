@@ -83,7 +83,7 @@ fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewMode
     
     var message by remember { mutableStateOf("") }
     Scaffold(
-        topBar = {ChatScreenTopAppBar(navController, fullName)}
+        topBar = {ChatScreenTopAppBar(navController, fullName, viewModel, userId,buddyId)}
 
     ) {paddingValues ->
         Column(modifier = Modifier
@@ -207,7 +207,7 @@ fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewMode
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreenTopAppBar(navController: NavController,fullName: String?){
+fun ChatScreenTopAppBar(navController: NavController,fullName: String?, viewModel: ChatViewModel = viewModel(),userId: String?,buddyId: String?){
     TopAppBar(
         title = {
             Row(
@@ -242,7 +242,15 @@ fun ChatScreenTopAppBar(navController: NavController,fullName: String?){
             }
         },
         actions = {
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                if (userId != null) {
+                    if (buddyId != null) {
+                        viewModel.removeBuddy(userId, buddyId)
+
+                        navController.navigate("start/$userId")
+                    }
+                }
+            }) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     modifier = Modifier.size(25.dp),

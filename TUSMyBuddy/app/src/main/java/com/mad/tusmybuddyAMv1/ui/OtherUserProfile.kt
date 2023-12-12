@@ -1,8 +1,5 @@
 package com.mad.tusmybuddyAMv1.ui
 
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +7,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,14 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
-import androidx.compose.material.icons.filled.ExitToApp
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.BottomAppBar
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -44,9 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -61,15 +47,13 @@ import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserProfileScreen(navController: NavController,viewModel: UserProfileViewModel = viewModel(), userId: String?){
+fun OtherProfileScreen(navController: NavController,viewModel: UserProfileViewModel = viewModel(), userId: String?){
     val userDataState = userId?.let { viewModel.fetchUserData(it).collectAsState(initial = Pair(User(), 0)) }
     val userData = userDataState?.value ?: Pair(User(), 0)
     Scaffold(
-        topBar = {UserProfileScreenTopAppBar(navController, userId)},
-        bottomBar = {UserProfileBottomNavigationBar(navController, userId)}
+        topBar = {OtherProfileScreenTopAppBar(navController)},
 
 
     ){paddingValues ->
@@ -78,9 +62,9 @@ fun UserProfileScreen(navController: NavController,viewModel: UserProfileViewMod
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Column() {
-               // buddies?.value?.let { MainScreenMessages(it, userId, navController) }
-               // UserProfileMainScreen()
-                userData.let { UserProfileMainScreen(it) }
+                // buddies?.value?.let { MainScreenMessages(it, userId, navController) }
+                // UserProfileMainScreen()
+                userData.let { OtherProfileMainScreen(it) }
 
 
             }
@@ -95,7 +79,7 @@ fun UserProfileScreen(navController: NavController,viewModel: UserProfileViewMod
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun UserProfileMainScreen(userData: Pair<User, Int>){
+fun OtherProfileMainScreen(userData: Pair<User, Int>){
     val user = userData.first
     val reputationIncrease = userData.second
     val buddiesCount = user.buddies?.filter { it != "placeholder" }?.size ?: 0
@@ -122,7 +106,7 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
                 fontSize =20.sp,
                 fontWeight = FontWeight.SemiBold,
 
-            )
+                )
 
         }
         Spacer(modifier = Modifier.height(2.dp))
@@ -138,7 +122,7 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
                 fontWeight = FontWeight.Light,
                 fontSize =15.sp,
 
-            )
+                )
         }
 
         Spacer(modifier = Modifier.height(4.dp))
@@ -356,104 +340,30 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserProfileScreenTopAppBar(navController: NavController, userId: String?){
-    val context = LocalContext.current
+fun OtherProfileScreenTopAppBar(navController: NavController){
     TopAppBar(
         title = {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.tus_logo_primary_eng_rgb),
-                    contentDescription = stringResource(R.string.home_screen_image_content_description),
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                        .size(dimensionResource(R.dimen.size_start_screen))
-                        //.clip(CircleShape) - Was going to use this for user profile, but it looks better with tus
-                        .aspectRatio(1f)
-                )
+            Row(verticalAlignment = Alignment.CenterVertically )
+            {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.KeyboardArrowLeft,
+                        modifier = Modifier.size(25.dp),
+                        contentDescription = stringResource(R.string.sign_up_screen_back_button)
+                    )
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+
+
+
+
             }
         },
         actions = {
-            IconButton(onClick = {
-                val dialIntent = Intent(Intent.ACTION_DIAL)
-                dialIntent.data = Uri.parse("tel:" + "+353874864779")
-                context.startActivity(dialIntent)
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.Call,
-                    modifier = Modifier.size(25.dp),
-                    contentDescription = "Call Alfred Michael"
-                )
-            }
-            IconButton(onClick = {
-                navController.navigate("profile/$userId")
-
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.Face,
-                    modifier = Modifier.size(25.dp),
-                    contentDescription = "Log out"
-                )
-            }
         }
+
 
     )
-
-}
-
-
-
-@Composable
-fun UserProfileBottomNavigationBar(navController: NavController, userId: String?) {
-    BottomAppBar {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("start/${it}")
-                }
-            }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.Home, contentDescription = "Home Icon")
-                    Text(text = "Home", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("connect/${it}")
-                }
-            }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
-                    Text(text = "Maps", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = { /* do something */ }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.Person, contentDescription = "User Icon")
-                    Text(text = "Profile", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("notificationmessages/${it}")
-                }
-            }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
-                    Text(text = "Notif..", fontSize = 12.sp)
-                }
-            }
-        }
-    }
 
 }
 
@@ -462,10 +372,10 @@ fun UserProfileBottomNavigationBar(navController: NavController, userId: String?
 
 @Preview(showBackground = true)
 @Composable
-fun UserProfileScreenPreview(viewModel: UserProfileViewModel = viewModel()) {
+fun OtherProfileScreenPreview(viewModel: UserProfileViewModel = viewModel()) {
     TUSMyBuddyTheme {
         val navController = rememberNavController()
-        UserProfileScreen(navController,viewModel, "dummy")
+        OtherProfileScreen(navController,viewModel, "dummy")
     }
 }
 
@@ -473,9 +383,9 @@ fun UserProfileScreenPreview(viewModel: UserProfileViewModel = viewModel()) {
 
 @Preview
 @Composable
-fun UserProfileScreenDarkPreview(viewModel: UserProfileViewModel = viewModel()) {
+fun OtherProfileScreenDarkPreview(viewModel: UserProfileViewModel = viewModel()) {
     TUSMyBuddyTheme(darkTheme = true) {
         val navController = rememberNavController()
-        UserProfileScreen(navController,viewModel,"dummy")
+        OtherProfileScreen(navController,viewModel,"dummy")
     }
 }

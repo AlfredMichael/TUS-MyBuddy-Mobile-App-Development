@@ -91,7 +91,8 @@ Column (modifier = Modifier
     Column() {
         Column {
             OutlinedButton(
-                onClick = {navController.navigate(Screen.Login.route)},
+                onClick = {
+                    navController.navigate(Screen.Login.route)},
                 modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(R.string.home_screen_loginButton),

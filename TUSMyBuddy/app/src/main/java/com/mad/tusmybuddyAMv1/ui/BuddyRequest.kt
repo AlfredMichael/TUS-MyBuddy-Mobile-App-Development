@@ -148,7 +148,7 @@ fun BuddyRequestMainMessages(pendingRequests: List<Pair<String, User>>, navContr
                         modifier = Modifier
                             .size(53.dp)
                             .clip(CircleShape)
-                            .clickable(onClick = {}),
+                            .clickable(onClick = {navController.navigate("otherprofilescreen/$userId")}),
                         contentScale = ContentScale.Crop
                     )
                     Spacer(modifier = Modifier.width(5.dp))

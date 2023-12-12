@@ -153,7 +153,8 @@ fun ConnectScreenMain(similarUsers: List<Pair<String, User>>, currentUserId: Str
                         .fillMaxWidth()
                         .size(165.dp)
                         .clickable(onClick = {
-                            //Profile Picture
+                            //Navigate to the other profile screen
+                            navController.navigate("otherprofilescreen/$userId")
                         }),
                     contentScale = ContentScale.Crop
                 )

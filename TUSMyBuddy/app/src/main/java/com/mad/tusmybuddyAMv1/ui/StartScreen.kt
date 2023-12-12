@@ -166,7 +166,12 @@ fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navCon
                     modifier = Modifier
                         .size(53.dp)
                         .clip(CircleShape)
-                        .clickable(onClick = {}),
+                        .clickable(onClick = {
+
+                                //Navigate to the Connect screen
+                                navController.navigate("otherprofilescreen/$buddyId")
+
+                        }),
                     contentScale = ContentScale.Crop
                 )
 

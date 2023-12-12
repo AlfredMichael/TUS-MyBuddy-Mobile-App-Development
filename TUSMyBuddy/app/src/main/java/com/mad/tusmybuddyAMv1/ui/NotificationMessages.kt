@@ -146,7 +146,7 @@ fun NotificationMainMessages(messageSenders: List<Pair<String, User>>, navContro
                         modifier = Modifier
                             .size(53.dp)
                             .clip(CircleShape)
-                            .clickable(onClick = {}),
+                            .clickable(onClick = {navController.navigate("otherprofilescreen/$userId")}),
                         contentScale = ContentScale.Crop
                     )
                     Spacer(modifier = Modifier.width(5.dp))

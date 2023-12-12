@@ -33,6 +33,7 @@ import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import androidx.annotation.RequiresApi
 import android.Manifest
 import android.content.res.Resources
+import android.net.ConnectivityManager
 import android.os.Build
 import android.util.Log
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -41,6 +42,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.firebase.Firebase
 import com.google.firebase.messaging.messaging
+import com.mad.tusmybuddyAMv1.ui.OtherProfileScreen
 import com.mad.tusmybuddyAMv1.ui.PermissionDialog
 import com.mad.tusmybuddyAMv1.ui.RationaleDialog
 import com.mad.tusmybuddyAMv1.ui.UserProfileScreen
@@ -48,6 +50,28 @@ import com.mad.tusmybuddyAMv1.ui.UserProfileViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import android.content.Context
+import android.net.Network
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 
 class MainActivity : ComponentActivity() {
@@ -67,6 +91,44 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val coroutineScope = rememberCoroutineScope()
+                    var showDialog by remember { mutableStateOf(true) }
+                    SideEffect {
+                        coroutineScope.launch {
+                            showDialog = !checkInternetConnection(this@MainActivity)
+                        }
+                    }
+
+                    if (showDialog) {
+                        AlertDialog(
+                            onDismissRequest = {
+                                coroutineScope.launch {
+                                    showDialog = !checkInternetConnection(this@MainActivity)
+                                }
+                            },
+                            title = { Text("") },
+                            text = {
+                                Column {
+                                    Image(
+                                        painter = painterResource(R.drawable.tus_logo_primary_eng_rgb),
+                                        contentDescription = "Dialog Image",
+                                        modifier = Modifier.size(100.dp)
+                                    )
+                                    Text("Error", fontFamily = publicSans,fontWeight = FontWeight.Bold,)
+                                    Text("No internet connection", fontFamily = publicSans)
+                                }
+                            },
+                            confirmButton = {
+                                TextButton(onClick = {
+                                    coroutineScope.launch {
+                                        showDialog = !checkInternetConnection(this@MainActivity)
+                                    }
+                                }) {
+                                    Text("OK")
+                                }
+                            }
+                        )
+                    }
                     NavGraph()
                     //StartScreen()
                     //val navController = rememberNavController()
@@ -82,6 +144,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+//Deprecated, but is the only stable way to do it for now
+private fun checkInternetConnection(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val networkInfo = connectivityManager.activeNetworkInfo
+    return networkInfo != null && networkInfo.isConnected
+}
+
+
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -93,6 +163,7 @@ fun RequestNotificationPermissionDialog() {
         else PermissionDialog { permissionState.launchPermissionRequest() }
     }
 }
+
 
 @Composable
 fun NavGraph(startDestination: String = Screen.Home.route) {
@@ -142,6 +213,12 @@ fun NavGraph(startDestination: String = Screen.Home.route) {
         composable("userprofilescreen/{userId}") { backStackEntry ->
             val userId = backStackEntry.arguments?.getString("userId")
             UserProfileScreen(navController,viewModeNL, userId)
+        }
+
+        // Accept a user ID as an argument in the User Profile screen
+        composable("otherprofilescreen/{userId}") { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId")
+            OtherProfileScreen(navController,viewModeNL, userId)
         }
 
         //Accept the user id, email and fullName as arguments
