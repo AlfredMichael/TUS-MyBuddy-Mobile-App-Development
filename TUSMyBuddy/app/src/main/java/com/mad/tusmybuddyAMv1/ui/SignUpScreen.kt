@@ -1,5 +1,6 @@
 package com.mad.tusmybuddyAMv1.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -50,6 +51,7 @@ import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.res.painterResource
 import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,8 +70,18 @@ fun SignUpScreen(navController: NavController, viewModel: RegistrationViewModel 
                 if (errorMessage != null) {
                     AlertDialog(
                         onDismissRequest = { viewModel.errorMessage.value = null },
-                        title = { Text("Error") },
-                        text = { Text(text = errorMessage!!) },
+                        title = { Text("") },
+                        text = {
+                            Column {
+                                Image(
+                                    painter = painterResource(R.drawable.tus_logo_primary_eng_rgb),
+                                    contentDescription = "Dialog Image",
+                                    modifier = Modifier.size(100.dp)
+                                )
+                                Text("Error", fontFamily = publicSans,fontWeight = FontWeight.Bold,fontSize = 22.sp)
+                                Text(text = errorMessage!!, fontFamily = publicSans)
+                            }
+                               },
                         confirmButton = {
                             TextButton(onClick = { viewModel.errorMessage.value = null }) {
                                 Text(text = "OK")

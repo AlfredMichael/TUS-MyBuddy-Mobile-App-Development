@@ -64,6 +64,7 @@ dependencies {
     //1. Coil dependency: Handle async image loading
     implementation("io.coil-kt:coil-compose:1.4.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-gif:2.1.0")
     //2. Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
     //3. Firebase
@@ -86,6 +87,9 @@ dependencies {
 
     //7. Permissions
     implementation("com.google.accompanist:accompanist-permissions:0.30.1")
+
+    //8. Status Bar Color
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

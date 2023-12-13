@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -68,7 +69,7 @@ fun OtherProfileScreen(navController: NavController,viewModel: UserProfileViewMo
 
 
             }
-            Text(text = "User ID: $userId")
+            //Text(text = "User ID: $userId")
 
         }
 
@@ -226,7 +227,7 @@ fun OtherProfileMainScreen(userData: Pair<User, Int>){
                     for (hobby in user.hobbies) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(
@@ -272,7 +273,7 @@ fun OtherProfileMainScreen(userData: Pair<User, Int>){
                     for (skill in user.skills) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(
@@ -314,7 +315,7 @@ fun OtherProfileMainScreen(userData: Pair<User, Int>){
                     for (interest in user.interests) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(

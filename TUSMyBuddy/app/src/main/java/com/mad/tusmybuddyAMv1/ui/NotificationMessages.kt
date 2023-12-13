@@ -27,13 +27,17 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -85,7 +89,7 @@ fun NotificationMessages(navController: NavController,viewModel: NotificationVie
                 Spacer(modifier = Modifier.height(5.dp))
 
             }
-            Text(text = "User ID: $userId")
+            //Text(text = "User ID: $userId")
 
         }
 
@@ -133,6 +137,9 @@ fun NotificationMainMessages(messageSenders: List<Pair<String, User>>, navContro
                             navController.navigate("start/${it}")
                         }
                     }),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
                 shape = RoundedCornerShape(10.dp)
             ) {
                 Row(
@@ -253,10 +260,20 @@ fun NotificationBottomNavigationBar(navController: NavController, userId: String
                 }
             }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
-                    Text(text = "Maps", fontSize = 12.sp)
+                    Icon(Icons.Filled.Search, contentDescription = "Find Icon")
+                    Text(text = "Find", fontSize = 12.sp)
                 }
             }
+
+            IconButton(onClick = {
+
+            }) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Default.Notifications, contentDescription = "Notifications Icon")
+                    Text(text = "Notif..", fontSize = 12.sp)
+                }
+            }
+
             IconButton(onClick = {
                 userId?.let {
                     //Navigate to the user profile screen
@@ -266,12 +283,6 @@ fun NotificationBottomNavigationBar(navController: NavController, userId: String
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.Person, contentDescription = "User Icon")
                     Text(text = "Profile", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = { /* do something */ }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
-                    Text(text = "Notif..", fontSize = 12.sp)
                 }
             }
         }

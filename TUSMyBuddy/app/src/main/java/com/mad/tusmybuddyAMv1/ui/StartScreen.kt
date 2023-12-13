@@ -24,9 +24,12 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,6 +38,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -49,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
@@ -56,6 +61,7 @@ import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,7 +83,7 @@ fun StartScreen(navController: NavController,viewModel: StartScreenViewModel = v
 
 
             }
-            Text(text = "User ID: $userId")
+            //Text(text = "User ID: $userId")
 
         }
 
@@ -126,7 +132,6 @@ fun StartScreenTopAppBar(viewModel: StartScreenViewModel = viewModel(), navContr
                 viewModel.logoutUser()
                 navController.navigate(Screen.Home.route)
 
-
             }) {
                 Icon(
                     imageVector = Icons.Filled.ExitToApp,
@@ -134,11 +139,14 @@ fun StartScreenTopAppBar(viewModel: StartScreenViewModel = viewModel(), navContr
                     contentDescription = "Log out"
                 )
             }
+
         }
 
     )
 
 }
+
+
 
 @Composable
 fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navController: NavController){
@@ -152,6 +160,9 @@ fun MainScreenMessages(buddies: List<Pair<String, User>>,userId: String?, navCon
                         navController.navigate("chat/${userId}/$buddyId/${buddy.email}/${buddy.fullName}")
                     }
                 }),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
             shape = MaterialTheme.shapes.medium
         ) {
             Row(
@@ -220,10 +231,23 @@ fun BottomNavigationBar(navController: NavController, userId: String?) {
                 }
             }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
-                    Text(text = "Maps", fontSize = 12.sp)
+                    Icon(Icons.Filled.Search, contentDescription = "Find Icon")
+                    Text(text = "Find", fontSize = 12.sp)
                 }
             }
+
+            IconButton(onClick = {
+                userId?.let {
+                    //Navigate to the Connect screen
+                    navController.navigate("notificationmessages/${it}")
+                }
+            }) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+                    Icon(Icons.Default.Notifications, contentDescription = "Notifications Icon")
+                    Text(text = "Notif..", fontSize = 12.sp)
+                }
+            }
+
             IconButton(onClick = {
                 userId?.let {
                     //Navigate to the user profile screen
@@ -233,17 +257,6 @@ fun BottomNavigationBar(navController: NavController, userId: String?) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Icon(Icons.Filled.Person, contentDescription = "User Icon")
                     Text(text = "Profile", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the Connect screen
-                    navController.navigate("notificationmessages/${it}")
-                }
-            }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
-                    Text(text = "Notif..", fontSize = 12.sp)
                 }
             }
         }

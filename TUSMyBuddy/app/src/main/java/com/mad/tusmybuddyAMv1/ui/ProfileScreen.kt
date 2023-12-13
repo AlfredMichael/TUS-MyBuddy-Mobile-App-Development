@@ -21,7 +21,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,6 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -164,8 +167,18 @@ fun ProfileScreenMainContent(
     if (errorMessage != null) {
         AlertDialog(
             onDismissRequest = { viewModel.errorMessage.value = null },
-            title = { Text("Error") },
-            text = { Text(text = errorMessage!!) },
+            title = { Text("") },
+            text = {
+                Column {
+                    Image(
+                        painter = painterResource(R.drawable.tus_logo_primary_eng_rgb),
+                        contentDescription = "Dialog Image",
+                        modifier = Modifier.size(100.dp)
+                    )
+                    Text("Error", fontFamily = publicSans,fontWeight = FontWeight.Bold,fontSize = 22.sp)
+                    Text(text = errorMessage!!, fontFamily = publicSans)
+                }
+                   },
             confirmButton = {
                 Button(onClick = { viewModel.errorMessage.value = null }) {
                     Text("OK")
@@ -182,7 +195,9 @@ fun ProfileScreenMainContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         //Card
-        Card(modifier = Modifier.fillMaxWidth()){
+        Card(modifier = Modifier.fillMaxWidth(),colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.onTertiary
+        ),){
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(
@@ -191,6 +206,7 @@ fun ProfileScreenMainContent(
                     top = dimensionResource(R.dimen.profile_screen_card_padding_top),
                     bottom = dimensionResource(R.dimen.profile_screen_card_padding_bottom)
                 ),
+
             horizontalAlignment = Alignment.CenterHorizontally){
                 //Image
                 if(profilePicture != null)
@@ -360,6 +376,9 @@ fun ProfileScreenMainContent(
                             //Navigate to the start screen
                             navController.navigate("start/${it}")
                         } },
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 14.dp
+                        ),
                         shape= MaterialTheme.shapes.medium,
                         modifier = Modifier.fillMaxWidth()) {
                         Text(

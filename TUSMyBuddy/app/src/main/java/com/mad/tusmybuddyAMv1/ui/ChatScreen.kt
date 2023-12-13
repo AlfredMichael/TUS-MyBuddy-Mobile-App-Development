@@ -1,6 +1,8 @@
 package com.mad.tusmybuddyAMv1.ui
 
+import android.os.Build.VERSION.SDK_INT
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -45,6 +47,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -53,7 +57,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.ComponentRegistry
+import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.compose.rememberImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.size.Size
 import com.mad.tusmybuddyAMv1.R
 import com.mad.tusmybuddyAMv1.ui.theme.TUSMyBuddyTheme
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
@@ -61,6 +71,17 @@ import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewModel(), userId: String?, email:String?, buddyId: String?, fullName: String?){
+    val context = LocalContext.current
+    val imageLoader = ImageLoader.Builder(context)
+        .components(fun ComponentRegistry.Builder.() {
+            if (SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        })
+        .build()
+
     /* -- Mistake - do not uncomment, tried using id and emails to retrieve messages
     val messages = userId?.let { userId ->
         email?.let { email ->
@@ -182,8 +203,14 @@ fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewMode
                         )
                     }
                 } else {
-                    AsyncImage(
-                        model = "https://cdn.dribbble.com/users/1297837/screenshots/5467001/media/8177f477683c974835744ab8768a2a4a.gif",
+                    Image(
+                        painter = rememberImagePainter(
+                            data = R.drawable._177f477683c974835744ab8768a2a_unscreen,
+                            imageLoader = imageLoader,
+                            builder = {
+                                size(Size.ORIGINAL)
+                            }
+                        ),
                         contentDescription = null,
                         modifier = Modifier
                             .size(200.dp),

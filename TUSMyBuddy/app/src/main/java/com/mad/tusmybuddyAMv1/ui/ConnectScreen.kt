@@ -23,15 +23,20 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -39,6 +44,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -78,7 +84,7 @@ fun ConnectScreen(navController: NavController,viewModel: ConnectViewModel = vie
 
 
             }
-            Text(text = "User ID: $userId")
+            //Text(text = "User ID: $userId")
 
         }
 
@@ -144,6 +150,9 @@ fun ConnectScreenMain(similarUsers: List<Pair<String, User>>, currentUserId: Str
         Card(modifier = Modifier
             .fillMaxWidth()
             .padding(start = 9.dp, end = 9.dp, top = 12.dp, bottom = 3.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
             shape = MaterialTheme.shapes.medium) {
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 AsyncImage(
@@ -182,10 +191,17 @@ fun ConnectScreenMain(similarUsers: List<Pair<String, User>>, currentUserId: Str
                 Spacer(modifier = Modifier.height(7.dp))
 
                 if (isBuddy != null) {
-                    Button(onClick = { viewModel.sendBuddyRequest(currentUserId, userId) },
-                        enabled = !isBuddy.value) {
+
+                    Button(
+                        onClick = { viewModel.sendBuddyRequest(currentUserId, userId) },
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 14.dp
+                        ),
+                        enabled = !isBuddy.value
+                    ) {
                         Text(text = if (isBuddy.value) "Buddy Request Sent" else "Send Buddy Request")
                     }
+
                 }
                 Spacer(modifier = Modifier.height(4.dp))
             }
@@ -216,19 +232,8 @@ fun ConnectBottomNavigationBar(navController: NavController, userId: String?) {
             }
             IconButton(onClick = { /* do something */ }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
-                    Text(text = "Maps", fontSize = 12.sp)
-                }
-            }
-            IconButton(onClick = {
-                userId?.let {
-                    //Navigate to the user profile screen
-                    navController.navigate("userprofilescreen/${it}")
-                }
-            }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.Person, contentDescription = "User Icon")
-                    Text(text = "Profile", fontSize = 12.sp)
+                    Icon(Icons.Filled.Search, contentDescription = "Find Icon")
+                    Text(text = "Find", fontSize = 12.sp)
                 }
             }
             IconButton(onClick = {
@@ -238,8 +243,20 @@ fun ConnectBottomNavigationBar(navController: NavController, userId: String?) {
                 }
             }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
+                    Icon(Icons.Default.Notifications, contentDescription = "Notifications Icon")
                     Text(text = "Notif..", fontSize = 12.sp)
+                }
+            }
+
+            IconButton(onClick = {
+                userId?.let {
+                    //Navigate to the user profile screen
+                    navController.navigate("userprofilescreen/${it}")
+                }
+            }) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Filled.Person, contentDescription = "User Icon")
+                    Text(text = "Profile", fontSize = 12.sp)
                 }
             }
         }

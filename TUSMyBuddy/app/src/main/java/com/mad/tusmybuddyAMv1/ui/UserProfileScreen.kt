@@ -28,11 +28,15 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -84,7 +88,7 @@ fun UserProfileScreen(navController: NavController,viewModel: UserProfileViewMod
 
 
             }
-            Text(text = "User ID: $userId")
+            //Text(text = "User ID: $userId")
 
         }
 
@@ -242,7 +246,7 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
                     for (hobby in user.hobbies) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(
@@ -288,7 +292,7 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
                     for (skill in user.skills) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(
@@ -330,7 +334,7 @@ fun UserProfileMainScreen(userData: Pair<User, Int>){
                     for (interest in user.interests) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = Color.Blue,
+                            color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(3.dp)
                         ) {
                             Text(
@@ -415,7 +419,7 @@ fun UserProfileBottomNavigationBar(navController: NavController, userId: String?
         ) {
             IconButton(onClick = {
                 userId?.let {
-                    //Navigate to the Connect screen
+                    //Navigate to the Start screen
                     navController.navigate("start/${it}")
                 }
             }) {
@@ -431,16 +435,11 @@ fun UserProfileBottomNavigationBar(navController: NavController, userId: String?
                 }
             }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.LocationOn, contentDescription = "Maps Icon")
-                    Text(text = "Maps", fontSize = 12.sp)
+                    Icon(Icons.Filled.Search, contentDescription = "Find Icon")
+                    Text(text = "Find", fontSize = 12.sp)
                 }
             }
-            IconButton(onClick = { /* do something */ }) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Filled.Person, contentDescription = "User Icon")
-                    Text(text = "Profile", fontSize = 12.sp)
-                }
-            }
+
             IconButton(onClick = {
                 userId?.let {
                     //Navigate to the Connect screen
@@ -448,8 +447,17 @@ fun UserProfileBottomNavigationBar(navController: NavController, userId: String?
                 }
             }) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                    Icon(Icons.Filled.Info, contentDescription = "Notifications Icon")
+                    Icon(Icons.Default.Notifications, contentDescription = "Notifications Icon")
                     Text(text = "Notif..", fontSize = 12.sp)
+                }
+            }
+
+            IconButton(onClick = {
+
+            }) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Filled.Person, contentDescription = "User Icon")
+                    Text(text = "Profile", fontSize = 12.sp)
                 }
             }
         }

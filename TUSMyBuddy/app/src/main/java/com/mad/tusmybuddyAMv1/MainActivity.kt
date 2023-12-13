@@ -71,6 +71,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.mad.tusmybuddyAMv1.ui.theme.publicSans
 
 
@@ -114,7 +115,7 @@ class MainActivity : ComponentActivity() {
                                         contentDescription = "Dialog Image",
                                         modifier = Modifier.size(100.dp)
                                     )
-                                    Text("Error", fontFamily = publicSans,fontWeight = FontWeight.Bold,)
+                                    Text("Error", fontFamily = publicSans,fontWeight = FontWeight.Bold,fontSize = 22.sp)
                                     Text("No internet connection", fontFamily = publicSans)
                                 }
                             },

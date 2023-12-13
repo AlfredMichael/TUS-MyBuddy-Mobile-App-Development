@@ -27,6 +27,8 @@ class StartScreenViewModel: ViewModel() {
 
     private val storage: FirebaseStorage = FirebaseStorage.getInstance()
 
+    val authState = MutableLiveData<AuthState>()
+
 
     fun fetchBuddies(userId: String): Flow<List<Pair<String, User>>> = callbackFlow {
         val usersDataRef = database.getReference("UsersData").child(userId).child("buddies")
@@ -68,6 +70,7 @@ class StartScreenViewModel: ViewModel() {
     fun logoutUser() {
         // Sign out the user
         auth.signOut()
+        authState.value = AuthState.LOGGED_OUT
 
     }
 
@@ -111,4 +114,8 @@ class StartScreenViewModel: ViewModel() {
     }*/
 
 
+}
+enum class AuthState {
+    LOGGED_IN,
+    LOGGED_OUT
 }
