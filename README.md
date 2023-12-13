@@ -62,9 +62,4 @@
   - Profile Page
   - Other User Profile Page
   - Internet Connection Error Message
-
-
-
-
-- WORK IN PROGRESS (:heavy_multiplication_x:)
   - TUS Theme
