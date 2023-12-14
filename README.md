@@ -1,6 +1,6 @@
 # TUS-MyBuddy-Mobile-App-Development
 
-Test App (Info) (:heavy_multiplication_x:)
+## Test App (Info)
   - Registration is Async, so there is a delay of about 5 to 6 seconds for the profile page (After Registration)
   - Test Emails {k00119023@student.tus.ie, k00780945@student.tus.ie, k00654321@student.tus.ie}
   - The test emails are for registration, any full name and password can be added...Please wait for 5 to 6 seconds after clicking the registration button (Reason: When the button is clicked it adds the data to the authentication, it then goes to the student data to make sure that the email exists then gets the data and inserts it into a different data base called the student data... So it runs multiple functions at the same time)
