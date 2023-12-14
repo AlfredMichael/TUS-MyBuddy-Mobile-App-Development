@@ -4,6 +4,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -130,7 +132,8 @@ fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewMode
                                     topEnd = 8.dp,
                                     bottomEnd = 0.dp,
                                     bottomStart = 8.dp),
-                                color = Color.Blue
+                                color = MaterialTheme.colorScheme.primary,
+                                shadowElevation = 12.dp
                             ) {
                                 Text(
                                     text = message.content,
@@ -153,11 +156,12 @@ fun ChatScreen(navController: NavController, viewModel: ChatViewModel = viewMode
                                     topEnd = 8.dp,
                                     bottomEnd = 8.dp,
                                     bottomStart = 0.dp),
-                                color = Color.LightGray
+                                color = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                                shadowElevation = 12.dp
                             ) {
                                 Text(
                                     text = message.content,
-                                    color = Color.Red,
+                                    color = if (isSystemInDarkTheme()) Color.Black else Color.White,
                                     modifier = Modifier.padding(8.dp)
                                 )
                             }

@@ -75,7 +75,7 @@ class StartScreenViewModel: ViewModel() {
     }
 
 
-    /*
+    /* Error - Did not get the user id
     fun fetchBuddies(userId: String): Flow<List<User>> = callbackFlow {
         val usersDataRef = database.getReference("UsersData").child(userId).child("buddies")
         val buddies = mutableListOf<User>()
