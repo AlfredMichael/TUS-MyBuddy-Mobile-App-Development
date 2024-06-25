@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d50b104d-c7e7-40fb-a041-fef66d4e7c4f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/migrations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TUSMyBuddy/app/tus-mybuddy-default-rtdb-export.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TUS-MyBuddy-Mobile-App-Development.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TUS-MyBuddy-Mobile-App-Development.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (1).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (2).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (3).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (4).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (5).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (6).jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/app-screenshot (7).jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUSMyBuddy/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/TUSMyBuddy/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TUSMyBuddy/app/google-services.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,12 +54,16 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2Z8609ANXC2PBRAjUAu9HFReSz4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -170,5 +172,8 @@
       <updated>1701791136907</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
