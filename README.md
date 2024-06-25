@@ -5,8 +5,38 @@
   - Registration is Async, so there is a delay of about 5 to 6 seconds for the profile page (After Registration)
   - Test Emails {k00119023@student.tus.ie, k00780945@student.tus.ie, k00654321@student.tus.ie}
   - The test emails are for registration, any full name and password can be added...Please wait for 5 to 6 seconds after clicking the registration button (Reason: When the button is clicked it adds the data to the authentication, it then goes to the student data to make sure that the email exists then gets the data and inserts it into a different data base called the student data... So it runs multiple functions at the same time)
-    
 
+## Important Note
+
+The `google-services.json` file has been removed from this repository for security reasons. This file contains sensitive Firebase credentials. If you want to run this project, you will need to supply your own `google-services.json` file.
+
+You can generate your own `google-services.json` file by creating a new Firebase project. Here's how you can do it:
+
+1. Go to the Firebase console.
+2. Click on 'Add project' and follow the on-screen instructions to create a new project.
+3. Once your project is created, click on 'Add Firebase to your Android app'.
+4. Follow the on-screen instructions to register your app and download the `google-services.json` file.
+5. Place the `google-services.json` file in the `app/` directory of your local clone of this repository.
+
+## Firebase Services
+
+This project uses several Firebase services:
+
+- **Firebase Authentication**: This service is used for handling the registration and login of users.
+- **Firebase Realtime Database**: This service is used for storing user profiles and messages.
+- **Firebase Storage**: This service is used for storing user profile pictures.
+
+A `.json` file (`tus-mybuddy-default-rtdb-export.json`) has been added to this repository, displaying the structure of the realtime database. This file can guide anyone who wants to create a similar project.
+
+## Permissions
+
+If you want to use this project, please get permission from me first. As long as you're not using it for commercial purposes, I'd be happy to assist!
+
+For any queries, feel free to reach out to me at k00290602@student.tus.ie 
+
+
+
+-----------------------------------  ----------------------------------------------------------------------- --------------------------------
 ## Week :one:
 - FEATURES THAT HAVE BEEN COMPLETED (:heavy_check_mark:)
   - Home Screen UI

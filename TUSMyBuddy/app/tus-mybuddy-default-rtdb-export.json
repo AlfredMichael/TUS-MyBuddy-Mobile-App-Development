@@ -1,0 +1,580 @@
+{
+  "Messages": {
+    "-NlKT06yiiVAG-wAbmFJ": {
+      "content": "Hey",
+      "date": 1702240981252,
+      "receiverId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22",
+      "senderId": "F8ub6CUopQV7lURa3oWw26U1Bhw1"
+    },
+    "-NlKTFonRhecdlIbhA43": {
+      "content": "Hi Nelly Belly",
+      "date": 1702241045563,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlNGUW3Ki-TFwWCs8ix": {
+      "content": "yooo",
+      "date": 1702288029690,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+    },
+    "-NlNGVOkDp6F09NXO0CQ": {
+      "content": "Hi",
+      "date": 1702288033048,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "CSH7EGroPbUAkaYga6auu32SgZd2"
+    },
+    "-NlNGZSdk4UZtozpJY57": {
+      "content": "fidkks",
+      "date": 1702288049952,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+    },
+    "-NlNG_MTdXWpAH5AJKBa": {
+      "content": "Hi",
+      "date": 1702288053382,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "CSH7EGroPbUAkaYga6auu32SgZd2"
+    },
+    "-NlNHc1teKd4EfX7f5bt": {
+      "content": "wjdhenf",
+      "date": 1702288326805,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+    },
+    "-NlU3l-VqeTetXA6VLVW": {
+      "content": "Hi",
+      "date": 1702402134091,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlcXzYxYZfHiOt-ey-Z": {
+      "content": "Hi Jason\n",
+      "date": 1702561052276,
+      "receiverId": "pBAOHPspFWfc3VZVy96NfVFKVb22",
+      "senderId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3"
+    },
+    "-NlcY0WwNEj-6CwapMaY": {
+      "content": "Hello\n",
+      "date": 1702561059429,
+      "receiverId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3",
+      "senderId": "pBAOHPspFWfc3VZVy96NfVFKVb22"
+    },
+    "-NlcY4GDdOJbBtIF7gBl": {
+      "content": "How're things",
+      "date": 1702561075653,
+      "receiverId": "pBAOHPspFWfc3VZVy96NfVFKVb22",
+      "senderId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3"
+    },
+    "-NlcY9_FEEfd3ZnRN6xa": {
+      "content": "Hi",
+      "date": 1702561096505,
+      "receiverId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3",
+      "senderId": "pBAOHPspFWfc3VZVy96NfVFKVb22"
+    },
+    "-NlcYAutfpyoKXoFY5oG": {
+      "content": "Yyyy",
+      "date": 1702561102896,
+      "receiverId": "pBAOHPspFWfc3VZVy96NfVFKVb22",
+      "senderId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3"
+    },
+    "-NliDtumIFIASnH6ygzy": {
+      "content": "Hi",
+      "date": 1702656449342,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NqCgeELnE9qiQD23SWK": {
+      "content": "Hi",
+      "date": 1707479312752,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "Y6HdfgK": {
+      "content": "Hi Michael Where are you?",
+      "date": 1670937600000,
+      "receiverId": "hWmsHCooR1SkoTzdd1Vx9ybAcfCD22",
+      "senderId": "ddddddd"
+    }
+  },
+  "Notifications": {
+    "-NlJU9NTv1Aj1Adlqcwi": {
+      "accepted": false,
+      "receiverId": "nLKaw2qE5PfJnEh66W2ddj5TdGK2Q2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAddddcfCD22"
+    },
+    "-NlKSTI__beFLoOWVaJF": {
+      "accepted": false,
+      "receiverId": "nLKaw2qE5PfJnEh66W2j5TdGK2Q2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlKSUL_1bxFMdWA-fj8": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlNGPpxsym9ZlGpwAva": {
+      "accepted": true,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+    },
+    "-NlU3pfzUK7l03et5ikS": {
+      "accepted": false,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV3DyFHCu3Z95Hm2D1": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV3I7-DaU63HtD_Q4x": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5-rkExNmV9wfdV5p": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV55Auk3eMA3LMP0jd": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV58qAMeOKBWBPpRP4": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5BP7wZTwzSkmbNaV": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5DTV2luTJyuJ7a8k": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5XbKf7XdW6lVIYWJ": {
+      "accepted": true,
+      "receiverId": "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5_30DV1-l0CVbnNs": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlV5vu_ht8QFf3z8y7g": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-NlZpW3-rTIjBvvZhyJ8": {
+      "accepted": true,
+      "receiverId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22",
+      "senderId": "F8ub6CUopQV7lURa3oWw26U1Bhw1"
+    },
+    "-NlcW5Otw8qOkkclTD7k": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "pBAOHPspFWfc3VZVy96NfVFKVb22"
+    },
+    "-NlcXqqjicyq7lXTRd0Q": {
+      "accepted": true,
+      "receiverId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3",
+      "senderId": "pBAOHPspFWfc3VZVy96NfVFKVb22"
+    },
+    "-NlcYHAddd-IP8fOWN9B": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3"
+    },
+    "-NlcoaeZI1NdpdzOH_DN": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "Axb4THklwdeYPcdlt4xJNC1wzRg1"
+    },
+    "-NlcobF0-8j4UQ-z1Zma": {
+      "accepted": false,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "Axb4THklwdeYPcdlt4xJNC1wzRg1"
+    },
+    "-Nlcp9xmBk2Gy3NBdLuE": {
+      "accepted": false,
+      "receiverId": "eE7wGa02DRbhV9XE3dwW2zD9uHA3",
+      "senderId": "Axb4THklwdeYPcdlt4xJNC1wzRg1"
+    },
+    "-NlcpA7uN40UEqVdYiwn": {
+      "accepted": false,
+      "receiverId": "pBAOHPspFWfc3VZVy96NfVFKVb22",
+      "senderId": "Axb4THklwdeYPcdlt4xJNC1wzRg1"
+    },
+    "-NoNKKjlAqbNFiTJWAVp": {
+      "accepted": false,
+      "receiverId": "CSH7EGroPbUAkaYga6auu32SgZd2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-Nt7LmyYoWNG-pzHnPDf": {
+      "accepted": false,
+      "receiverId": "nLKaw2qE5PfJnEh66W2j5TdGK2Q2",
+      "senderId": "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+    },
+    "-O-wbb_Odc8_Tk8EWI1W": {
+      "accepted": false,
+      "receiverId": "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+      "senderId": "wZdN9qZrCkMrJKp2R4S6rl6mJRj2"
+    }
+  },
+  "StudentData": {
+    "56pnJhEVDl": {
+      "Course": "Biology",
+      "StudentEmail": "k00490602@student.tus.ie",
+      "Year": 3
+    },
+    "5vuv4uu5": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00590602@student.tus.ie",
+      "Year": 3
+    },
+    "Fygyy6fui": {
+      "Course": "Maths",
+      "StudentEmail": "k00200408@student.tus.ie",
+      "Year": 1
+    },
+    "HdSyJvbGDL": {
+      "Course": "Culinary Arts",
+      "StudentEmail": "k00790602@student.tus.ie",
+      "Year": 3
+    },
+    "b4WL6gIhJR": {
+      "Course": "Mathematics",
+      "StudentEmail": "k00390602@student.tus.ie",
+      "Year": 3
+    },
+    "djug0LfQ8w": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00290602@student.tus.ie",
+      "Year": 3
+    },
+    "efddsgsd3": {
+      "Course": "ISD",
+      "StudentEmail": "k00460502@student.tus.ie",
+      "Year": 3
+    },
+    "ffhduudj56f": {
+      "Course": "Engineering",
+      "StudentEmail": "k00654321@student.tus.ie",
+      "Year": 3
+    },
+    "fknfkfni": {
+      "Course": "Mathematics",
+      "StudentEmail": "k00780945@student.tus.ie",
+      "Year": 3
+    },
+    "fubfibs": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00390602@student.tus.ie",
+      "Year": 3
+    },
+    "grgrrjhuue": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00123456@student.tus.ie",
+      "Year": 2
+    },
+    "hviasbi": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00273673@student.tus.ie",
+      "Year": 3
+    },
+    "iidiir4w4i": {
+      "Course": "Internet Systems Development",
+      "StudentEmail": "k00111111@student.tus.ie",
+      "Year": 3
+    },
+    "jdfbididb": {
+      "Course": "Computing",
+      "StudentEmail": "k00119023@student.tus.ie",
+      "Year": 3
+    },
+    "uddvosvudfo": {
+      "Course": "Biology",
+      "StudentEmail": "k00890602@student.tus.ie",
+      "Year": 3
+    },
+    "yyyhfy7y": {
+      "Course": "Economics",
+      "StudentEmail": "k00987654@student.tus.ie",
+      "Year": 2
+    }
+  },
+  "UsersData": {
+    "Axb4THklwdeYPcdlt4xJNC1wzRg1": {
+      "bio": "I love kotlin",
+      "buddies": [
+        "placeholder",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+        "CSH7EGroPbUAkaYga6auu32SgZd2",
+        "eE7wGa02DRbhV9XE3dwW2zD9uHA3",
+        "pBAOHPspFWfc3VZVy96NfVFKVb22"
+      ],
+      "buddiesCount": 0,
+      "course": "Economics",
+      "email": "k00987654@student.tus.ie",
+      "fullName": "Alfred Figma",
+      "hobbies": [
+        "programming",
+        "cooking"
+      ],
+      "interests": [
+        "programming",
+        "cooking"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FAxb4THklwdeYPcdlt4xJNC1wzRg1?alt=media&token=f850fae3-ca5b-495e-bd05-bc24b6a2b569",
+      "reputationPoints": 0,
+      "skills": [
+        "programming",
+        "cooking"
+      ],
+      "username": "fredthedev",
+      "year": 2
+    },
+    "CSH7EGroPbUAkaYga6auu32SgZd2": {
+      "bio": "hxjdbdkdndeb",
+      "buddies": [
+        "placeholder",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+      ],
+      "buddiesCount": 0,
+      "course": "ISD",
+      "email": "k00460502@student.tus.ie",
+      "fullName": "Alfred Michael",
+      "hobbies": [
+        "hhh",
+        "hhh",
+        "programming"
+      ],
+      "interests": [
+        "programming",
+        "hrjrjdb",
+        "jdjsn"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FCSH7EGroPbUAkaYga6auu32SgZd2?alt=media&token=595dd862-4427-4bb5-9ff3-67aa7d75ab4a",
+      "reputationPoints": 0,
+      "skills": [
+        "programming"
+      ],
+      "username": "fredthedev",
+      "year": 3
+    },
+    "F8ub6CUopQV7lURa3oWw26U1Bhw1": {
+      "bio": "currently accepting people",
+      "buddies": [
+        "hWmsHCooR1SkoTz1Vx9ybAcfCD22"
+      ],
+      "buddiesCount": 0,
+      "course": "Internet Systems Development",
+      "email": "k00290602@student.tus.ie",
+      "fullName": "Nelly Bell",
+      "hobbies": [
+        "hhh",
+        "MMA"
+      ],
+      "interests": [
+        "Mma",
+        "NBA"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FF8ub6CUopQV7lURa3oWw26U1Bhw1?alt=media&token=987d0cb5-13a5-4540-a050-08ad97ba7f4a",
+      "reputationPoints": 0,
+      "skills": [
+        "driving",
+        "recruiting"
+      ],
+      "username": "Nelly",
+      "year": 3
+    },
+    "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2": {
+      "bio": "male",
+      "buddies": [
+        "placeholder",
+        "CSH7EGroPbUAkaYga6auu32SgZd2"
+      ],
+      "buddiesCount": 0,
+      "course": "Internet Systems Development",
+      "email": "k00273673@student.tus.ie",
+      "fullName": "Like Kelly",
+      "hobbies": [
+        "tv"
+      ],
+      "interests": [
+        "anime",
+        "football"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FWLcAYhLgM7Xaj1ZlQnJ2IixexMT2?alt=media&token=4259c8f3-bd50-4c40-ad8d-6ace6cde932c",
+      "reputationPoints": 0,
+      "skills": [
+        "programming"
+      ],
+      "username": "lukekelly100",
+      "year": 3
+    },
+    "cW0D5uetgWaephqBxjNaRN7dkHC2": {
+      "course": "Mathematics",
+      "email": "k00390602@student.tus.ie",
+      "fullName": "Jason Price",
+      "year": 3
+    },
+    "eE7wGa02DRbhV9XE3dwW2zD9uHA3": {
+      "bio": "hello",
+      "buddies": [
+        "placeholder",
+        "pBAOHPspFWfc3VZVy96NfVFKVb22",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+      ],
+      "buddiesCount": 0,
+      "course": "Internet Systems Development",
+      "email": "k00123456@student.tus.ie",
+      "fullName": "Jason Price",
+      "hobbies": [
+        "hello"
+      ],
+      "interests": [
+        "swimming",
+        "programming"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FeE7wGa02DRbhV9XE3dwW2zD9uHA3?alt=media&token=486c7e19-9500-4069-b3c1-bc49dc01179c",
+      "reputationPoints": 0,
+      "skills": [
+        "programming",
+        "communication"
+      ],
+      "username": "heyy",
+      "year": 2
+    },
+    "hWmsHCooR1SkoTz1Vx9ybAcfCD22": {
+      "bio": "testing update",
+      "buddies": [
+        "placeholder",
+        "F8ub6CUopQV7lURa3oWw26U1Bhw1",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+        "CSH7EGroPbUAkaYga6auu32SgZd2",
+        "nLKaw2qE5PfJnEh66W2j5TdGK2Q2"
+      ],
+      "buddiesCount": 0,
+      "course": "Culinary Arts",
+      "email": "k00790602@student.tus.ie",
+      "fullName": "mince neat",
+      "hobbies": [
+        "hhh",
+        "hhh",
+        "anime",
+        "h",
+        "hhjhh",
+        "hhh",
+        "hhh",
+        "anime",
+        "h",
+        "hhhh"
+      ],
+      "interests": [
+        "hhh",
+        "hhh",
+        "anime",
+        "h",
+        "hhjhh"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FhWmsHCooR1SkoTz1Vx9ybAcfCD22?alt=media&token=6931b67f-ac33-4e97-a9db-012978aea814",
+      "reputationPoints": 0,
+      "skills": [
+        "hhh",
+        "hhh",
+        "anime",
+        "h",
+        "hhhh"
+      ],
+      "username": "nice gee",
+      "year": 3
+    },
+    "nLKaw2qE5PfJnEh66W2j5TdGK2Q2": {
+      "bio": "I love cats",
+      "buddiesCount": 0,
+      "course": "Biology",
+      "email": "k00490602@student.tus.ie",
+      "fullName": "Fran Davies",
+      "hobbies": [
+        "hhh",
+        "Indian movies"
+      ],
+      "interests": [
+        "Boxing",
+        "NBA"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FnLKaw2qE5PfJnEh66W2j5TdGK2Q2?alt=media&token=6fba8e81-d047-4d73-a2ba-24bb1cf6d8d9",
+      "reputationPoints": 0,
+      "skills": [
+        "Cooking",
+        "Martial arts"
+      ],
+      "username": "Fran",
+      "year": 3
+    },
+    "pBAOHPspFWfc3VZVy96NfVFKVb22": {
+      "bio": "laois, ....",
+      "buddies": [
+        "placeholder",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2",
+        "eE7wGa02DRbhV9XE3dwW2zD9uHA3"
+      ],
+      "buddiesCount": 0,
+      "course": "Biology",
+      "email": "k00890602@student.tus.ie",
+      "fullName": "Alfred Michael",
+      "hobbies": [
+        "painting"
+      ],
+      "interests": [
+        "volleyball. chess"
+      ],
+      "reputationPoints": 0,
+      "skills": [
+        "programming",
+        "volleyball"
+      ],
+      "username": "rover",
+      "year": 3
+    },
+    "wZdN9qZrCkMrJKp2R4S6rl6mJRj2": {
+      "bio": "a good guy",
+      "buddies": [
+        "placeholder",
+        "WLcAYhLgM7Xaj1ZlQnJ2IixexMT2"
+      ],
+      "buddiesCount": 0,
+      "course": "Maths",
+      "email": "k00200408@student.tus.ie",
+      "fullName": "Michael",
+      "hobbies": [
+        "anime",
+        "hockey"
+      ],
+      "interests": [
+        "anime",
+        "hockey"
+      ],
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FwZdN9qZrCkMrJKp2R4S6rl6mJRj2?alt=media&token=89bc4851-f672-46ee-90a0-7c1545248c82",
+      "reputationPoints": 0,
+      "skills": [
+        "anime",
+        "hockey"
+      ],
+      "username": "fredthedev",
+      "year": 1
+    },
+    "zjqK608S20VNWHNkbm7jqaTYgyD3": {
+      "profilePicture": "https://firebasestorage.googleapis.com/v0/b/tus-mybuddy.appspot.com/o/profilePictures%2FzjqK608S20VNWHNkbm7jqaTYgyD3?alt=media&token=708644cc-76ca-41ca-abcd-f2c06a899f48"
+    }
+  }
+}
