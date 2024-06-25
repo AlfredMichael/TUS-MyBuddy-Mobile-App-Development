@@ -6,7 +6,8 @@ TUS-MyBuddy is a social network for students at the Technological University Of 
 
 Please note that this app is meant for test purposes only. Messages are stored in a real-time database and are not encrypted. The app is intended for students who attend TUS.
 
-![App Screenshot](images/app-screenshot%20(1).jpg)
+<img src="images/app-screenshot%20(1).jpg" width="200" alt="App Screenshot">
+
 ![App Screenshot](images/app-screenshot%20(2).jpg)
 ![App Screenshot](images/app-screenshot%20(3).jpg)
 ![App Screenshot](images/app-screenshot%20(4).jpg)
