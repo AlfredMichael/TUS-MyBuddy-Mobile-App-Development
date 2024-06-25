@@ -8,7 +8,7 @@ Please note that this app is meant for test purposes only. Messages are stored i
 
 ## Test the App
 
-To test the app, download the `app-debug.apk` file from the `release` folder in this GitHub repository. Use the following test credentials to log in:
+To test the app, download the `app-debug.apk` file from the `release` folder in this GitHub repository and transfer it to your android device. Use the following test credentials to log in:
 
 - Email: K00987789@student.tus.ie, Password: @sharonmackie20
 - Email: K00012211@student.tus.ie, Password: @Neilmack12
