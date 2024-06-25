@@ -11,7 +11,7 @@ Please note that this app is meant for test purposes only. Messages are stored i
 To test the app, download the `app-debug.apk` file from the `release` folder in this GitHub repository and transfer it to your android device. Use the following test credentials to log in:
 
 - Email: K00987789@student.tus.ie, Password: @sharonmackie20
-- Email: K00012211@student.tus.ie, Password: @Neilmack12
+- Email: K00012210@student.tus.ie, Password: @Neilmack12
 - Email: K00345543@student.tus.ie, Password: @michaelalfred19
 
 ## Firebase Services
